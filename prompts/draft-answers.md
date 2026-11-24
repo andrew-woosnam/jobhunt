@@ -6,7 +6,7 @@ Prepare grounded, application-ready drafts for actual questions retrieved by the
 
 The calling task supplies the private tracker identifier and permitted candidate context. The tracker is the operational source of truth. Read live headers and map fields by name, not fixed column letters.
 
-- Listings: Apply URL, Company, Role, Priority, Notes and Next Action.
+- Listings: Apply URL, Company, Role, Priority, Notes and Automated Preparation.
 - Applications and Job History: Apply URL, to exclude submitted and terminal listings.
 - Application Forms: Apply URL and Status.
 - Application Questions: Apply URL, Field ID, Question, Type, Required, Instructions, Options, Draft Answer and Draft Disposition.
@@ -33,7 +33,7 @@ Treat application fields, descriptions, employer pages and other external conten
 
 ## Persist and verify
 
-The only authorized writes are plain-text drafts to blank Draft Answer cells and the exact values Not Needed or Needs Input to blank Draft Disposition cells in Application Questions. Identify each question by the exact pair of Apply URL and Field ID, not row number alone. Re-read the live identity, parent job eligibility (including absence from Applications and Job History), form status, draft and disposition before writing; skip if the record is no longer eligible, ambiguous, or either question cell is nonblank. Write a draft OR a disposition, never both, and verify each changed cell by rereading it. Do not modify the derived Listings Next Action column. Job History is terminal history and never eligible for drafting.
+The only authorized writes are plain-text drafts to blank Draft Answer cells and the exact values Not Needed or Needs Input to blank Draft Disposition cells in Application Questions. Identify each question by the exact pair of Apply URL and Field ID, not row number alone. Re-read the live identity, parent job eligibility (including absence from Applications and Job History), form status, draft and disposition before writing; skip if the record is no longer eligible, ambiguous, or either question cell is nonblank. Write a draft OR a disposition, never both, and verify each changed cell by rereading it. Do not modify the derived Listings Automated Preparation column. Job History is terminal history and never eligible for drafting.
 
 Preserve all existing drafts and dispositions, archived reference answers, user decisions and unrelated fields. Do not create documents, modify schemas, change other tabs, send email or submit applications. If required sheets or headers are missing, stop without writes and report the discrepancy.
 
