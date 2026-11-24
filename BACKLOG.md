@@ -6,7 +6,12 @@ Prioritize improvements that reduce application effort or increase application t
 
 ## Now
 
-No active development ticket; select the next increment from Next.
+### JH-043 — Derive application priority from fit and preparation
+
+- [ ] Preserve legacy ratings as editable Fit (Strong, Good, Stretch); do not imply fresh evaluation.
+- [ ] Derive Listings Priority from Fit and Automated Preparation: Strong 1/2/2, Good 2/3/3, Stretch 3/4/4 (Complete/Partial/Pending). Leave unrated listings unranked.
+- [ ] Update discovery, drafting, retrieval and row-transfer consumers; prioritize automated preparation by Fit rather than derived Priority.
+- [ ] Verify live migration, all matrix cases and preservation of historical ratings. Record deployment and unattended verification boundaries.
 
 ## Next
 
