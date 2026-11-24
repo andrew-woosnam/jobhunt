@@ -33,7 +33,7 @@ This is first and foremost a tool to support my own job search. Its effectivenes
 
 ## Current architecture
 
-- **Google Sheets:** Operational data store and user interface.
+- **Google Sheets:** Operational data store and user interface. Jobs tracks opportunities, priority and derived preparation; Companies holds employer decisions; Application Forms records retrieval outcomes; Application Questions stores actual fields and drafts. Legacy Answers and DEMO tabs are archived (hidden); Answers remains available as historical drafting context.
 - **Google Drive and Gmail:** Candidate materials and employer correspondence.
 - **Scheduled ChatGPT workflows:** Discovery, evaluation, answer drafting and correspondence reconciliation.
 - **Google Apps Script:** Deterministic application form retrieval for Ashby and Greenhouse, with incremental processing, persistent retrieval status and execution logging.
@@ -69,9 +69,9 @@ flowchart TD
     H --> J
 ```
 
-**Eligibility and filtering.** Employer approval is a human decision. Use deterministic filtering for clear mismatches and reliable structured constraints; leave ambiguous cases for AI evaluation. Suitable listings can proceed to application preparation without mandatory individual approval. The user retains control over whether to apply.
+**Eligibility and filtering.** Employer approval is a human decision. Use deterministic filtering for clear mismatches and reliable structured constraints; leave ambiguous cases for AI evaluation. Suitable listings at approved employers proceed to application preparation without mandatory individual approval. The user retains control over whether to apply, dismiss or reprioritize a listing.
 
-**State and coordination.** Sheets is the shared persistent state. Each operation processes outstanding work, preserves existing decisions and avoids duplicate processing. Employer eligibility, listing suitability, availability, preparation progress and application lifecycle are distinct concepts; introduce separate fields only when implementation requires them. Confirmed posting closures should leave application history intact. A failed form request, network error or ambiguous redirect is not proof of closure.
+**State and coordination.** Sheets is the shared persistent state. Each operation processes outstanding work, preserves existing decisions and avoids duplicate processing. Employer eligibility, listing suitability, availability, preparation progress and application lifecycle are distinct concepts; introduce separate fields only when implementation requires them. Confirmed posting closures should leave application history intact. A failed form request, network error or ambiguous redirect is not proof of closure. Present a prioritized, actionable queue rather than requiring the user to manage internal workflow states. Retire legacy Review/To Apply semantics when employer approval, listing evaluation and availability have authoritative replacements.
 
 **Execution boundaries.** Prefer Apps Script for retrieval, filtering, validation and bookkeeping; retain scheduled ChatGPT tasks for open-ended research, nuanced judgment and writing. Defer unsupported or ambiguous cases to AI-assisted or manual review as appropriate. Cadences are approximate, not strict dependencies: a downstream operation can pick up newly available records on its next run. No paid LLM API or additional orchestration infrastructure is required for this design.
 
@@ -93,8 +93,8 @@ AI workflow instructions are being piloted as version-controlled Markdown in [`p
 
 ## Project status
 
-The application question retrieval MVP (JH-004) is complete and manually validated for both supported ATS platforms. Scheduled execution (JH-025), drafting integration (JH-026) and practical evaluation (JH-027) are separate deliverables.
+Application form retrieval (JH-004), AI drafting integration (JH-026), derived preparation visibility (JH-041) and retirement of legacy listing-specific motivation storage (JH-032) are implemented. Unattended execution, failure recovery and practical application quality still need verification.
 
-Next, migrate deterministic operations from scheduled ChatGPT workflows to Apps Script incrementally. Retain AI for research, nuanced fit assessment and tailored writing. No paid LLM API or additional infrastructure is planned at this stage.
+Next, formalize employer approval (JH-012), retrieve postings from approved employers (JH-011), and integrate availability checks and listing suitability evaluation. Continue validating preparation during normal use. Retain existing AI workflows until their replacements are verified. No paid LLM API or additional infrastructure is planned.
 
 See the [engineering journal](JOURNAL.md) for design decisions and results, and the [backlog](BACKLOG.md) for current priorities.
