@@ -178,3 +178,9 @@ Pilot this approach with JH-026. Verify that scheduled execution can retrieve th
 A manually initiated run of the GitHub-backed task considered five listings and wrote four motivation answers with zero reported write failures. Independent read-back confirmed the reported prompt blob SHA (`ecd77650d1c3a842ce4c0bff87fe2e4837172612`), four persisted drafts on eligible listings, and unique question identities. The drafts were reasonably specific and grounded; routine fields and questions requiring unconfirmed technical experience remained blank. No complete pre-run snapshot was available to independently establish that all unrelated cells were unchanged.
 
 This validates the initial instruction retrieval and drafting path, but not unattended execution, technical-answer quality, repeat-run behavior or retrieval-failure handling. Repeat the run unchanged to check draft preservation and whether unresolved questions impede queue progress. Defer prompt refinement to JH-033.
+
+### Repeat drafting run
+
+A second manually initiated run used the same prompt revision and added five drafts, including technical accomplishments and interests. Independent read-back confirmed nine total drafts, all four earlier answers unchanged, all drafted questions on eligible retrieved forms, and no duplicate question identities. The new accomplishment answers were relevant and within the form's word limit. An unresolved experience question did not prevent progress to another listing. Some optional substantive questions were only answered on the second run, despite being available during the first; monitor completeness during practical evaluation.
+
+Manual integration and repeat-run checks passed for the observed cases. Unattended execution and fail-closed prompt retrieval remain untested. No prompt or schema changes are needed to finish baseline verification.
