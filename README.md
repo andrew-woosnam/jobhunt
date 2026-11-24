@@ -58,13 +58,13 @@ The goal is a continuously maintained queue of current, prioritized, application
 ```mermaid
 flowchart TD
     A["AI: Discover employers"] --> B["Human: Approve employers"]
-    B --> C["GAS: Retrieve, deduplicate and filter listings"]
+    B --> C["Google Apps Script: Retrieve, deduplicate and filter listings"]
     C --> D["AI: Evaluate fit and priority"]
-    D --> E["GAS: Retrieve application questions"]
+    D --> E["Google Apps Script: Retrieve application questions"]
     E --> F["AI: Draft substantive answers"]
     F --> G["Human: Review and apply"]
-    G --> H["GAS: Reconcile confirmations"]
-    C --> I["GAS: Verify posting availability"]
+    G --> H["Google Apps Script: Reconcile confirmations"]
+    C --> I["Google Apps Script: Verify posting availability"]
     I --> J["Update opportunity queue"]
     H --> J
 ```
