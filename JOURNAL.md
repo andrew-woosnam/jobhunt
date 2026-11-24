@@ -141,3 +141,9 @@ Move mechanical work into Google Apps Script: known-employer job board retrieval
 Keep Sheets as shared persistent state and GitHub as the source of truth for code. Avoid paid LLM APIs and additional infrastructure for now. Migrate incrementally, inspecting existing automation responsibilities before replacing them.
 
 Finish and evaluate JH-004's answer-drafting integration first. Then investigate deterministic discovery at known employers alongside availability verification, reusing ATS adapters where practical. Address email reconciliation separately, subject to mailbox access.
+
+### Delivery boundaries
+
+The retrieval MVP is implemented, manually validated and committed to GitHub. The original JH-004 scope bundled a completed capability with its operational deployment, downstream integration and product evaluation. Close JH-004 as deterministic question retrieval; track scheduled execution (JH-025), integration with the existing answer-drafting task (JH-026) and real-application evaluation (JH-027) independently.
+
+Prefer backlog tickets with one independently verifiable outcome and explicit dependencies. Prioritize JH-026 now; JH-025 can be verified independently. Known-employer ATS discovery (JH-011) is promoted from parked work as a candidate for deterministic migration, alongside availability verification (JH-001). Avoid speculative infrastructure and paid LLM APIs.
