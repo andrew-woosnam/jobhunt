@@ -38,8 +38,21 @@ function retrieveApplicationQuestions() {
         .map(r => JSON.stringify([r[0], r[3]]))
     );
 
+    const inactive = new Set();
+    for (const name of ['Applications', 'Job History']) {
+      const sheet = ss.getSheetByName(name);
+      if (!sheet) continue;
+      const rows = sheet.getDataRange().getValues();
+      const urlCol = rows.shift().indexOf('Apply URL');
+      if (urlCol < 0) throw new Error(`Missing Apply URL in ${name}`);
+      for (const row of rows) {
+        if (row[urlCol]) inactive.add(String(row[urlCol]).trim());
+      }
+    }
+
     const eligible = jobs.filter(job =>
       job[col['Apply URL']] &&
+      !inactive.has(String(job[col['Apply URL']]).trim()) &&
       (col['Status'] === undefined || job[col['Status']] === 'To Apply')
     );
 
