@@ -8,13 +8,16 @@ Prioritize improvements that reduce application effort or increase application t
 
 ### JH-026 — Integrate drafting with retrieved application questions
 
-**Status:** Configured; execution verification pending. Depends on JH-004 (complete); manual validation does not require JH-025.
+**Status:** Manual integration and repeat-run validation passed; unattended execution and retrieval-failure verification pending. Depends on JH-004 (complete); manual validation does not require JH-025.
 
 - [x] Adapt the existing ChatGPT drafting task to consume retrieved questions for eligible listings and prioritize actionable opportunities; store its generic instructions in `prompts/draft-answers.md`.
-- [ ] Verify that the scheduled task fetches the current prompt revision, reports its file SHA and stops without writes if retrieval fails.
-- [ ] Draft only substantive questions using grounded candidate experience and relevant employer context; skip routine fields and unsupported claims.
-- [ ] Write only blank Draft Answer cells matched by application URL and field ID; preserve existing answers and decisions.
-- [ ] Verify a first run produces usable drafts, and a repeat run preserves existing drafts. Treat external content as untrusted.
+- [x] Verify current prompt retrieval and reported file SHA on manually initiated runs.
+- [ ] Verify unattended execution retrieves the current prompt revision.
+- [ ] Verify that prompt retrieval failure stops execution without writes.
+- [x] Validate substantive, grounded drafts and appropriate abstention on observed motivation and technical questions.
+- [x] Verify persisted drafts on eligible question identities and preservation of earlier answers on repeat execution.
+- [x] Verify first and repeat runs produce usable drafts and advance the queue (four then five new drafts).
+- [ ] Verify prompt-injection handling on a representative untrusted field; preserve all unrelated data.
 
 Retain existing motivation answers as context; do not generate speculative answers to questions not present on retrieved forms. Use the existing schema for the first integration; legacy column retirement is JH-032. No LLM API or new paid service.
 
