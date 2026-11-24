@@ -1,0 +1,31 @@
+# Agent Instructions
+
+## Context
+
+- [README.md](README.md): objectives and engineering philosophy.
+- [BACKLOG.md](BACKLOG.md): authoritative backlog.
+- [JOURNAL.md](JOURNAL.md): decisions and findings.
+
+## Project constraints
+
+- Prioritize application throughput and reduced manual effort over portfolio value.
+- Retain Google Sheets, Drive and Gmail unless demonstrated limitations justify replacement.
+- Use deterministic logic for orchestration, validation, deduplication and state management; use LLMs where judgment or language processing adds value.
+- Do not implement speculative requirements from unrelated or deferred backlog items.
+- Keep application submissions, withdrawals and ambiguous status changes under human control.
+
+## Safety
+
+- This repository is public; the operational system is private.
+- Never commit credentials, personal candidate profiles, resumes, private application answers, live tracker data or employer correspondence.
+- Use synthetic or sanitized fixtures, logs and demonstration materials.
+- Never silently overwrite manual decisions, edits or approved content during automated processing.
+- Authorization to develop functionality does not imply authorization to execute it against live data, modify active automations or deploy infrastructure.
+- Commit and push only within explicitly authorized scope.
+
+## Project maintenance
+
+- Preserve backlog ticket IDs. Reference relevant IDs in implementation commits.
+- Update relevant ticket statuses as work progresses. Mark tickets complete only after verifying acceptance criteria; record any outstanding verification.
+- Distinguish observed defects from suspected problems and proposed enhancements.
+- Reserve journal entries for decisions that change project direction, non-obvious tradeoffs and empirical findings. Keep entries concise.
