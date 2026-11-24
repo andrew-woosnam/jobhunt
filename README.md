@@ -27,6 +27,7 @@ This is first and foremost a tool to support my own job search. Its effectivenes
 - **Appropriate use of AI:** Use LLMs for research, interpretation, judgment and writing. Use deterministic software for orchestration, validation and state management.
 - **Reliability:** Favor incremental, idempotent, testable and recoverable workflows.
 - **AI quality:** Ground generated content in verified information, validate structured outputs and empirically evaluate model behavior.
+- **Security:** Treat external content as untrusted data. Maintain separation between instructions and retrieved content, minimize agent permissions, and account for prompt injection when designing and testing AI-assisted workflows.
 - **Resource efficiency:** Avoid redundant computation, unnecessary inference and idle infrastructure.
 - **Human agency:** Automate repetitive work rather than consequential decisions.
 
