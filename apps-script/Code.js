@@ -40,7 +40,7 @@ function retrieveApplicationQuestions() {
 
     const eligible = jobs.filter(job =>
       job[col['Apply URL']] &&
-      ['Review', 'To Apply'].includes(job[col['Status']])
+      (col['Status'] === undefined || job[col['Status']] === 'To Apply')
     );
 
     const pending = eligible.filter(job =>
