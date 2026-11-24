@@ -25,7 +25,6 @@ Highest immediate return: make the implemented retrieval/drafting pipeline relia
 | JH-035 | Verify fail-closed prompt retrieval | Use a controlled missing-file or failed-retrieval case to confirm the drafting task reports the failure and performs no writes. Avoid disrupting the live schedule or tracker. | JH-026 |
 | JH-036 | Verify drafting prompt-injection resistance | Exercise representative untrusted application-field instructions using sanitized fixtures; confirm the task ignores malicious instructions, does not bypass human checks or disclose private data, and respects its write boundary. | JH-026 |
 | JH-040 | Recover transient application form retrieval failures | Fix the observed defect in which any Application Forms record, including Failed, permanently excludes a URL from retrieval. Retry transient HTTP/network failures with a bounded attempt limit and spacing; retain terminal unsupported cases and report exhausted failures for manual review. Preserve existing question identities and drafts, and verify retry success, exhaustion and repeat execution using sanitized fixtures or controlled failures. | JH-004 |
-| JH-041 | Surface application readiness in Jobs | Provide a derived, filterable preparation indicator in the existing Jobs view, independent of priority, availability and application lifecycle. Distinguish pending retrieval, pending drafting, ready, needs input and manual preparation. Do not infer readiness from blank drafts or a retrieved form alone: distinguish routine fields from substantive unanswered or unresolved questions, adding minimal persisted disposition only if necessary. Verify representative cases including no bespoke questions, partial drafts, blockers and failed/unsupported forms. | JH-004, JH-026 |
 | JH-027 | Evaluate application preparation | Use drafts in three to five real applications; record answer quality, time savings and remaining friction in the journal. No dedicated evaluation framework. | JH-026 |
 | JH-033 | Refine application drafting prompts | After baseline validation, allow targeted retrieval of documented candidate evidence; keep the bootstrap limited to retrieval, private configuration and authorization. Simplify workflow instructions around outcomes and completion criteria; distinguish question-level blockers from systemic failures, continue useful work and avoid blocked listings monopolizing the budget. Preserve grounding, prompt-injection safeguards, identity checks, non-overwrite and read-back verification. Compare representative outputs before/after; add examples or persistent state only for observed failures. | JH-026 |
 
@@ -101,6 +100,18 @@ Material posting change detection is deferred within JH-001 unless stale researc
 Automated application submission and general-purpose agent frameworks remain outside the current scope.
 
 ## Done
+
+### JH-041 — Surface application readiness in Jobs (MVP)
+
+**Completed:** 2026-11-24. Live tracker formula and classification migration verified; unattended processing of newly retrieved questions and newly added jobs remains to be observed in normal runs.
+
+- [x] Add a filterable, formula-derived Preparation column to the existing Jobs table without replacing Status or Priority.
+- [x] Distinguish Pending Retrieval, Pending Drafting, Ready, Needs Input and Manual Preparation using form retrieval status, field count, existing drafts and explicit question disposition.
+- [x] Add minimal Draft Disposition to Application Questions: blank is pending unless a draft exists; Not Needed identifies routine fields; Needs Input identifies missing evidence or an applicant decision. A nonblank draft takes precedence.
+- [x] Backfill existing questions without overwriting drafts; verify representative no-bespoke-question, complete-draft, partial-draft, blocked, failed and unsupported cases against the live formula results.
+- [x] Update the versioned drafting prompt and its runtime authorization boundary; instruct the discovery task to copy the formula for new and manually added job rows.
+
+Ready means bespoke written preparation is complete, not that the posting is open, the applicant is eligible, or routine form inputs have been filled. Failure or inconsistent retrieval counts never imply readiness. Existing Apps Script writes remain compatible; no deployment required for this increment. See the journal for verification and remaining limitations.
 
 ### JH-026 — Integrate drafting with retrieved application questions (MVP / 26.1)
 
