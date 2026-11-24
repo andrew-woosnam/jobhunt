@@ -34,7 +34,7 @@ Next substantive implementation. Employer approval is a small prerequisite; shar
 
 | ID | Improvement | Desired outcome / acceptance criteria | Dependencies |
 |---|---|---|---|
-| JH-012 | Formalize employer approval | Establish a single authoritative, revisable employer decision (approved, unreviewed, excluded; retain existing labels if equivalent). Resolve redundant Interest/Decision semantics, preserve existing human decisions and history, and keep listing priority independent. Only approved employers enter deterministic board discovery; update affected consumers and verify exclusions. | — |
+| JH-012 | Formalize employer approval | Establish a single authoritative, revisable employer decision (approved, unreviewed, excluded; retain existing labels if equivalent). Retain the single Decision field (redundant Interest already removed), formalize explicit approval, preserve existing human decisions and history, and keep listing priority independent. Only approved employers enter deterministic board discovery; update affected consumers and verify exclusions. | — |
 | JH-011 | Retrieve postings at approved employers | Google Apps Script retrieves published postings from known Ashby and Greenhouse boards daily, normalizes metadata and persists new postings using stable ATS identities without duplicates or overwriting manual decisions. Start with known board identifiers; keep newly discovered listings pending evaluation rather than prematurely eligible for preparation. Verify repeat execution and isolated board failures; defer additional ATS platforms until warranted. | JH-012 |
 | JH-001 | Verify posting availability | Reuse successful board retrieval under JH-011 to verify unapplied listings daily without redundant requests. Record confirmed closures and their first observation date without losing application history. A failed or incomplete board response, failed form retrieval or uncertain availability is not proof of closure. Verify missing postings, partial failures and preservation of later application states. | JH-011 where supported |
 | JH-030 | Filter obvious listing mismatches | Deterministic filtering excludes clear mismatches using reliable structured constraints; uncertain cases remain eligible for AI evaluation. Preserve manual overrides. | JH-011 |
@@ -47,7 +47,6 @@ Narrow employer research and listing evaluation into distinct responsibilities. 
 | ID | Improvement | Desired outcome / acceptance criteria | Dependencies |
 |---|---|---|---|
 | JH-028 | Discover new employers for approval | Separate employer research from listing evaluation. A scheduled ChatGPT task researches and deduplicates prospective employers two or three times weekly (e.g. M/W/Sat), plus ad hoc, and records candidates for human review without automatically approving them. Verify that existing employer decisions are preserved. | JH-012 |
-| JH-032 | Retire legacy listing-specific motivation storage | Preserve existing motivation answers, update all remaining consumers (including scheduled task bootstraps and version-controlled prompts), and remove the superseded Jobs motivation column after actual-question drafting is validated in practice. Verify no data loss or broken consumers. | JH-027 |
 | JH-042 | Version-control remaining AI workflow instructions | Extend the validated runtime prompt retrieval pattern to employer research and listing evaluation as their responsibilities stabilize. Keep private runtime configuration and authorization outside Git; verify exact revision reporting and fail-closed retrieval before retiring embedded instructions. Do not migrate the email prompt solely for consistency if Apps Script replacement is imminent. | JH-034–JH-036, JH-028, JH-029 |
 | JH-016 | Improve candidate context and answer reuse | Retrieve relevant professional experience and previous answers without repeatedly researching or drafting from scratch. Keep private candidate information outside the public repository. | Reassess after JH-027 |
 
@@ -100,6 +99,15 @@ Material posting change detection is deferred within JH-001 unless stale researc
 Automated application submission and general-purpose agent frameworks remain outside the current scope.
 
 ## Done
+
+### JH-032 — Retire legacy listing-specific motivation storage
+
+**Completed:** 2026-11-24 (schema migration and consumer updates). At the user's request, retired the obsolete column before the separate practical evaluation JH-027.
+
+- [x] Preserve the three existing motivation drafts verbatim in Answers, with listing provenance and a historical-draft label; verify before deletion.
+- [x] Remove the Jobs motivation column and update the versioned drafting prompt and all three scheduled job-search workflows.
+- [x] Verify the existing 46 listings and their preparation and status values after the cleanup. Subsequent unattended execution remains unverified.
+
 
 ### JH-041 — Surface application readiness in Jobs (MVP)
 
