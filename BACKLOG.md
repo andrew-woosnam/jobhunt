@@ -6,21 +6,6 @@ Prioritize improvements that reduce application effort or increase application t
 
 ## Now
 
-### JH-026 — Integrate drafting with retrieved application questions
-
-**Status:** Manual integration and repeat-run validation passed; unattended execution and retrieval-failure verification pending. Depends on JH-004 (complete); manual validation does not require JH-025.
-
-- [x] Adapt the existing ChatGPT drafting task to consume retrieved questions for eligible listings and prioritize actionable opportunities; store its generic instructions in `prompts/draft-answers.md`.
-- [x] Verify current prompt retrieval and reported file SHA on manually initiated runs.
-- [ ] Verify unattended execution retrieves the current prompt revision.
-- [ ] Verify that prompt retrieval failure stops execution without writes.
-- [x] Validate substantive, grounded drafts and appropriate abstention on observed motivation and technical questions.
-- [x] Verify persisted drafts on eligible question identities and preservation of earlier answers on repeat execution.
-- [x] Verify first and repeat runs produce usable drafts and advance the queue (four then five new drafts).
-- [ ] Verify prompt-injection handling on a representative untrusted field; preserve all unrelated data.
-
-Retain existing motivation answers as context; do not generate speculative answers to questions not present on retrieved forms. Use the existing schema for the first integration; legacy column retirement is JH-032. No LLM API or new paid service.
-
 ### JH-025 — Verify scheduled application question retrieval
 
 **Status:** Verification pending. Depends on JH-004 (complete).
@@ -35,6 +20,9 @@ Complete the application preparation increment first, then align the remaining w
 
 | ID | Improvement | Desired outcome / acceptance criteria | Dependencies |
 |---|---|---|---|
+| JH-034 | Verify unattended AI drafting | Inspect a scheduled run for successful current prompt retrieval, matching file SHA and correct incremental processing. No manual initiation required. | JH-026 |
+| JH-035 | Verify fail-closed prompt retrieval | Use a controlled missing-file or failed-retrieval case to confirm the drafting task reports the failure and performs no writes. Avoid disrupting the live schedule or tracker. | JH-026 |
+| JH-036 | Verify drafting prompt-injection resistance | Exercise representative untrusted application-field instructions using sanitized fixtures; confirm the task ignores malicious instructions, does not bypass human checks or disclose private data, and respects its write boundary. | JH-026 |
 | JH-033 | Refine application drafting prompts | After baseline validation, allow targeted retrieval of documented candidate evidence; keep the bootstrap limited to retrieval, private configuration and authorization. Simplify workflow instructions around outcomes and completion criteria; distinguish question-level blockers from systemic failures, continue useful work and avoid blocked listings monopolizing the budget. Preserve grounding, prompt-injection safeguards, identity checks, non-overwrite and read-back verification. Compare representative outputs before/after; add examples or persistent state only for observed failures. | JH-026 |
 | JH-027 | Evaluate application preparation | Use drafts in three to five real applications; record answer quality, time savings and remaining friction in the journal. No dedicated evaluation framework. | JH-026 |
 | JH-028 | Discover new employers for approval | A scheduled ChatGPT task researches and deduplicates prospective employers two or three times weekly, plus ad hoc, and records candidates for human review without automatically approving them. | JH-012's approval semantics |
@@ -87,6 +75,18 @@ Material posting change detection is deferred within JH-001 unless stale researc
 Automated application submission and general-purpose agent frameworks remain outside the current scope.
 
 ## Done
+
+### JH-026 — Integrate drafting with retrieved application questions (MVP / 26.1)
+
+**Completed:** 2026-11-24. Manual integration and repeat-run validation passed. Remaining verification is tracked separately in JH-034–JH-036.
+
+- [x] Adapt the existing ChatGPT task to consume retrieved questions for eligible listings and store instructions in `prompts/draft-answers.md`.
+- [x] Verify current prompt retrieval and reported file SHA on manually initiated runs.
+- [x] Validate substantive, grounded drafts and appropriate abstention on observed motivation and technical questions.
+- [x] Verify persisted drafts on eligible question identities and preservation of earlier answers on repeat execution.
+- [x] Verify queue progress: four then five new drafts across two runs, with zero reported write failures and no duplicate question identities.
+
+Retain existing motivation answers as context; legacy column retirement is JH-032. No new schema or paid service. See the journal for results and verification limitations.
 
 ### JH-004 — Deterministic application question retrieval (MVP)
 
