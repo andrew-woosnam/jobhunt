@@ -11,6 +11,7 @@
 - Prioritize application throughput and reduced manual effort over portfolio value.
 - Retain Google Sheets, Drive and Gmail unless demonstrated limitations justify replacement.
 - Use deterministic logic for orchestration, validation, deduplication and state management; use LLMs where judgment or language processing adds value.
+- Prefer GAS for deterministic scheduled operations; retain existing ChatGPT tasks for judgment-intensive work. Do not introduce a paid LLM API without explicit authorization.
 - Do not implement speculative requirements from unrelated or deferred backlog items.
 - Keep application submissions, withdrawals and ambiguous status changes under human control.
 
@@ -27,6 +28,7 @@
 
 - Before each commit, review README.md against the changes being committed. Update it in the same commit if the changes materially affect documented functionality, architecture, setup, usage or project status; otherwise leave it unchanged.
 - Preserve backlog ticket IDs. Reference relevant IDs in implementation commits.
+- Scope each ticket to one independently verifiable outcome. Split implementation, scheduling, consumer integration and practical evaluation when they can be completed independently; record dependencies rather than bundling dependent work.
 - Update relevant ticket statuses as work progresses. Mark tickets complete only after verifying acceptance criteria; record any outstanding verification.
 - Distinguish observed defects from suspected problems and proposed enhancements.
 - Reserve journal entries for decisions that change project direction, non-obvious tradeoffs and empirical findings. Keep entries concise.
