@@ -8,9 +8,10 @@ Prioritize improvements that reduce application effort or increase application t
 
 ### JH-026 — Integrate drafting with retrieved application questions
 
-**Status:** Ready. Depends on JH-004 (complete); manual validation does not require JH-025.
+**Status:** Configured; execution verification pending. Depends on JH-004 (complete); manual validation does not require JH-025.
 
-- [ ] Adapt the existing ChatGPT drafting task to consume retrieved questions for eligible listings and prioritize actionable opportunities.
+- [x] Adapt the existing ChatGPT drafting task to consume retrieved questions for eligible listings and prioritize actionable opportunities; store its generic instructions in `prompts/draft-answers.md`.
+- [ ] Verify that the scheduled task fetches the current prompt revision, reports its file SHA and stops without writes if retrieval fails.
 - [ ] Draft only substantive questions using grounded candidate experience and relevant employer context; skip routine fields and unsupported claims.
 - [ ] Write only blank Draft Answer cells matched by application URL and field ID; preserve existing answers and decisions.
 - [ ] Verify a first run produces usable drafts, and a repeat run preserves existing drafts. Treat external content as untrusted.
