@@ -102,7 +102,7 @@ Automated application submission and general-purpose agent frameworks remain out
 ### JH-043 — Derive application priority from fit and preparation
 
 - [x] Preserve legacy ratings as editable Fit (Strong, Good, Stretch); do not imply fresh evaluation.
-- [x] Derive Listings Priority from Fit and Automated Preparation: Strong 1/2/2, Good 2/3/3, Stretch 3/4/4 (Complete/Partial/Pending). Leave unrated listings unranked.
+- [x] Derive Listings Priority from Fit and Automated Preparation: Strong 1/2/2, Good 3/4/4, Stretch 4/5/5 (Complete/Partial/Pending); Strong always outranks other fits. Leave unrated listings unranked.
 - [x] Update discovery, drafting, retrieval and row-transfer consumers; prioritize automated preparation by Fit rather than derived Priority.
 - [x] Verify live migration, all matrix cases and preservation of historical ratings. Record deployment and unattended verification boundaries.
 
