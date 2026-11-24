@@ -22,7 +22,7 @@ function retrieveApplicationQuestions() {
     console.info('Starting application question retrieval');
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const jobs = ss.getSheetByName('Jobs').getDataRange().getValues();
+    const jobs = (ss.getSheetByName('Listings') || ss.getSheetByName('Jobs')).getDataRange().getValues();
     const forms = getOrCreateSheet(ss, 'Application Forms', FORM_HEADERS);
     const questions = getOrCreateSheet(ss, 'Application Questions', QUESTION_HEADERS);
 
@@ -61,7 +61,7 @@ function retrieveApplicationQuestions() {
     );
 
     console.info(
-      `Jobs: ${jobs.length} total, ${eligible.length} eligible, ${pending.length} pending`
+      `Listings: ${jobs.length} total, ${eligible.length} eligible, ${pending.length} pending`
     );
 
     if (!pending.length) {
