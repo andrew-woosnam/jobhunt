@@ -14,7 +14,7 @@ Prioritize the following increments in approximate delivery order toward the [in
 
 ### 1. Finish and expose application preparation
 
-Highest immediate return: make the implemented retrieval/drafting pipeline reliable in unattended operation and useful from the existing Jobs view. Evaluate real applications before expanding prompt sophistication.
+Highest immediate return: make the implemented retrieval/drafting pipeline reliable in unattended operation and useful from the existing Listings view. Evaluate real applications before expanding prompt sophistication.
 
 | ID | Improvement | Desired outcome / acceptance criteria | Dependencies |
 |---|---|---|---|
@@ -70,7 +70,7 @@ These original tickets are retained for continuity but are not independent deliv
 | ID | Original concern | Treatment |
 |---|---|---|
 | JH-025 | Scheduled application question retrieval | Retrieval implementation is complete under JH-004; original scheduling scope is split into JH-037–JH-039. Operational verification remains outstanding. |
-| JH-002 | Separate posting and application state | Jobs now exposes one derived Next Action; Closed/Rejected move to Job History, and Review is retired. Remove hidden To Apply compatibility state when employer approval, listing evaluation and availability replace its eligibility function (JH-012, JH-029, JH-001); preserve application history and deduplicate across active and terminal records. |
+| JH-002 | Separate posting and application state | Listings now exposes one derived Next Action; Closed/Rejected move to Job History, and Review is retired. Remove hidden To Apply compatibility state when employer approval, listing evaluation and availability replace its eligibility function (JH-012, JH-029, JH-001); preserve application history and deduplicate across active and terminal records. |
 | JH-005 | Workflow coordination | Move deterministic operations into Google Apps Script incrementally; retain scheduled ChatGPT for research, judgment and drafting. Inspect existing automation responsibilities before replacing them; use Sheets as shared state rather than building a workflow engine. |
 | JH-006 | Identity and deduplication | Address demonstrated identity or matching risks within affected workflows. |
 | JH-007 | Manual edit protection | Preserve manual decisions and approved content in each affected workflow. |
