@@ -166,3 +166,9 @@ Establish a single authoritative location for each type of information. Distingu
 Resolve answer-storage redundancy as part of JH-026 rather than introducing a separate, comprehensive schema redesign. Address employer eligibility and reusable answer organization within their respective backlog tickets.
 
 Going forward, review existing fields and automation responsibilities when introducing replacement functionality. Avoid accumulating parallel mechanisms that serve the same purpose.
+
+### Version-controlled AI instructions
+
+Extend GitHub's role as the source of truth to AI workflow instructions. Store generic prompts in version-controlled Markdown files, with scheduled ChatGPT tasks acting as lightweight entry points that retrieve the current instructions at runtime. Keep schedules, connections and private operational configuration outside the public repository.
+
+Pilot this approach with JH-026. Verify that scheduled execution can retrieve the intended revision, report which revision was used and fail without modifying data if retrieval is unsuccessful. Defer broader migration until validated; no paid LLM API or custom deployment tooling is needed for the proposed approach.
