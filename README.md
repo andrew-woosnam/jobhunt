@@ -37,7 +37,7 @@ This is first and foremost a tool to support my own job search. Its effectivenes
 - **Google Drive and Gmail:** Candidate materials and employer correspondence.
 - **Scheduled ChatGPT workflows:** Discovery, evaluation, answer drafting and correspondence reconciliation.
 - **Google Apps Script:** Deterministic application form retrieval for Ashby and Greenhouse, with incremental processing, persistent retrieval status and execution logging.
-- **GitHub:** Authoritative source for code and project documentation.
+- **GitHub:** Authoritative source for code, project documentation and the application drafting prompt (runtime retrieval pilot).
 
 ## Intended workflow
 
@@ -88,6 +88,8 @@ git pull --ff-only && (cd apps-script && clasp push)
 ```
 
 Manage scheduled triggers, authorization and execution history in Apps Script. Avoid editing source in the hosted editor because subsequent pushes replace the remote source. Automated deployment is deferred.
+
+AI workflow instructions are being piloted as version-controlled Markdown in [`prompts/`](prompts/). The existing application drafting task is configured to fetch [`draft-answers.md`](prompts/draft-answers.md) from the default branch on each run and report the file revision. It must stop without writes if retrieval fails. Task scheduling, connections, private tracker configuration and candidate evidence remain outside the public repository. Changes to this prompt require no Apps Script deployment; scheduled execution of the new configuration has not yet been verified.
 
 ## Project status
 
