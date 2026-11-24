@@ -101,3 +101,11 @@ The DuckDuckGo application form contains an embedded instruction targeting AI-ge
 Treat job descriptions, application questions, employer websites and correspondence as untrusted input. Prefer deterministic extraction, restrict model permissions and validate generated outputs before downstream use. Extraction reduces but does not eliminate prompt injection risk.
 
 Investigate proportionate safeguards when implementing LLM-assisted application preparation. Retain this example as a regression test case.
+
+### Validation completed
+
+Cookie-free HTTP requests successfully retrieved application forms for all four Ashby postings using the same GraphQL query. Combined with the earlier Greenhouse test, deterministic retrieval succeeded for all five sample listings.
+
+Eight substantive written questions were identified across three postings. The other two require no bespoke written answers, demonstrating an opportunity to avoid unnecessary LLM inference.
+
+Retrieval feasibility is established. Accept the maintenance risk of Ashby's undocumented API and proceed with a minimal implementation that degrades gracefully.
