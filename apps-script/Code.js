@@ -69,7 +69,12 @@ function retrieveApplicationQuestions() {
       return;
     }
 
-    const batch = pending.slice(0, batchSize);
+    const fitRank = job => {
+      const fit = job[col['Fit']];
+      const rank = ['Strong', 'Good', 'Stretch'].indexOf(fit);
+      return rank === -1 ? 3 : rank;
+    };
+    const batch = pending.sort((a, b) => fitRank(a) - fitRank(b)).slice(0, batchSize);
 
     const stats = {
       retrieved: 0,
