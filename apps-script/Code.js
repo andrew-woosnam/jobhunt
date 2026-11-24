@@ -324,5 +324,7 @@ function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('Job Hunt')
     .addItem('Retrieve application questions', 'retrieveApplicationQuestions')
+    .addItem('Preview job availability (no writes)', 'previewJobAvailability')
+    .addItem('Check job availability', 'checkJobAvailability')
     .addToUi();
 }

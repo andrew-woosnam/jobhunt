@@ -28,12 +28,10 @@ Highest immediate return: make the implemented retrieval/drafting pipeline relia
 
 ### 2. Automate known-employer discovery and availability
 
-Next substantive implementation. Start with shared ATS board retrieval and availability verification of existing listings; this does not require employer approval or new-listing discovery. Reuse the same board data for subsequent approved-employer discovery and filtering, then hand off judgment to AI.
+Shared ATS board retrieval and availability reconciliation are implemented in source. Validate and schedule them before retiring overlapping AI work. Reuse the same board data for subsequent approved-employer discovery and filtering, then hand off judgment to AI.
 
 | ID | Improvement | Desired outcome / acceptance criteria | Dependencies |
 |---|---|---|---|
-| JH-044 | Implement shared ATS board retrieval | Add reusable Ashby and Greenhouse public board adapters to the existing Apps Script project. Derive board and stable posting identities from known listing URLs, normalize published posting metadata, fetch each unique board once per run, and distinguish valid complete snapshots from failed or incomplete responses. Verify representative URLs, duplicate board references, malformed responses and isolated board failures using sanitized fixtures or controlled read-only requests. No discovery or tracker mutation in this increment. | — |
-| JH-001 | Verify posting availability in Apps Script | Add a manually runnable availability reconciliation function with a dry-run mode for existing unapplied Listings, independent of employer approval. Confirm presence from shared board snapshots; verify absent postings via a reliable individual posting endpoint or explicit closure evidence before moving them to Job History. Account for unlisted postings and ambiguous redirects; failed/incomplete board responses, failed form retrieval, network errors and uncertain availability never establish closure. Record first observed confirmed closure date, preserve associated forms, questions, drafts, manual decisions and submitted application history, and recheck listing identity and lifecycle before writes. Verify open, unlisted, closed, unsupported and transient-failure cases, partial transfer recovery and idempotent reruns. Defer additional ATS adapters until coverage warrants them. | JH-044 |
 | JH-045 | Validate and schedule availability reconciliation | Compare dry-run classifications against representative live postings; review ambiguous or unsupported cases and confirm no false closures in the reviewed sample. After explicit deployment authorization, enable a daily Apps Script trigger and verify unattended execution, isolated failures, safe repeat runs and actionable summaries. Retain AI availability checking until verified. | JH-001 |
 | JH-046 | Retire redundant AI availability checks | Inspect the current Job Search task and, after scheduled GAS verification, remove availability checks only for cases reliably handled by Apps Script. Preserve unsupported/ambiguous fallback and all other discovery and evaluation responsibilities. Verify the revised task configuration and subsequent handoff; avoid parallel routine checks. | JH-045 |
 | JH-012 | Formalize employer approval | Establish a single authoritative, revisable employer decision (approved, unreviewed, excluded; retain existing labels if equivalent). Retain the single Decision field (redundant Interest already removed), formalize explicit approval, preserve existing human decisions and history, and keep listing priority independent. Only approved employers enter deterministic board discovery; update affected consumers and verify exclusions. | — |
@@ -99,6 +97,14 @@ Material posting change detection is deferred within JH-001 unless stale researc
 Automated application submission and general-purpose agent frameworks remain outside the current scope.
 
 ## Done
+
+### JH-001 — Verify posting availability in Apps Script
+
+**Completed:** 2026-11-24 (source implementation and synthetic fixture verification; deployment and live execution pending under JH-045). Added read-only preview and live reconciliation with schema validation, shared board fetches, direct confirmation of missing postings, supported/unknown/unsupported classifications, first archived closure date in Last Checked, and append/read-back/delete recovery. Protects existing applications, history conflicts, duplicate identities and changed source values; preserves forms and drafts. Ashby absence, null or redirects alone are not closure. Actual Sheets behavior, live ATS response shapes and unattended execution require JH-045; AI fallback remains in place.
+
+### JH-044 — Implement shared ATS board retrieval
+
+**Completed:** 2026-11-24 (source implementation and synthetic fixture verification). Reusable public Ashby and Greenhouse board adapters normalize metadata, identify postings from ATS IDs, cache one result per board per execution, validate response completeness and isolate failures. No discovery writes. Live endpoint verification remains part of JH-045.
 
 ### JH-037 — Confirm question retrieval trigger
 
