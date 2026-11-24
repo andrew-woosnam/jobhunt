@@ -55,6 +55,8 @@ Manage scheduled triggers, authorization and execution history in Apps Script. A
 
 ## Project status
 
-Application question retrieval is implemented and manually validated for both supported ATS platforms. Scheduled execution and integration with automated answer drafting remain to be verified. Development focuses on observed limitations rather than wholesale replacement of functional components.
+The application question retrieval MVP (JH-004) is complete and manually validated for both supported ATS platforms. Scheduled execution (JH-025), drafting integration (JH-026) and practical evaluation (JH-027) are separate deliverables.
+
+Next, migrate deterministic operations from scheduled ChatGPT workflows to Apps Script incrementally. Retain AI for research, nuanced fit assessment and tailored writing. No paid LLM API or additional infrastructure is planned at this stage.
 
 See the [engineering journal](JOURNAL.md) for design decisions and results, and the [backlog](BACKLOG.md) for current priorities.
