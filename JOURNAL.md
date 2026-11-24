@@ -131,3 +131,13 @@ Retrieval also exposes potentially stale postings, suggesting an inexpensive opp
 Use GitHub as the authoritative source for Apps Script code and Google's hosted project as its execution environment. Manage synchronization with Google's clasp CLI; local authentication succeeded. Prefer manual deployment with clasp push for now rather than introducing CI/CD. Keep account credentials and project-specific configuration outside the public repository.
 
 Next: import the working script into GitHub, enable or verify scheduled execution, and integrate the existing answer-drafting automation. Evaluate practical value before further refinement.
+
+## 2026-11-24 — Deterministic workflow boundaries
+
+Rather than consolidating scheduled tasks for consistency alone, decompose workflows into small operations and assign each to the simplest suitable executor.
+
+Move mechanical work into Google Apps Script: known-employer job board retrieval, normalization, deduplication, explicit eligibility filtering, availability verification, application form retrieval, exact answer reuse, unambiguous email reconciliation and state updates. Reserve scheduled ChatGPT tasks for open-ended employer research, nuanced fit and priority assessment, tailored answer drafting and ambiguous interpretation. Preserve human control over consequential decisions and submissions.
+
+Keep Sheets as shared persistent state and GitHub as the source of truth for code. Avoid paid LLM APIs and additional infrastructure for now. Migrate incrementally, inspecting existing automation responsibilities before replacing them.
+
+Finish and evaluate JH-004's answer-drafting integration first. Then investigate deterministic discovery at known employers alongside availability verification, reusing ATS adapters where practical. Address email reconciliation separately, subject to mailbox access.
