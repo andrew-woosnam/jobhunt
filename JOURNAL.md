@@ -75,3 +75,13 @@ Development is beginning to compete with the project's primary purpose: submitti
 Reprioritize the backlog according to demonstrated problems and anticipated time savings, accounting for development and maintenance costs.
 
 First, experiment with retrieving questions from application forms and preparing tailored answers in advance. Evaluate feasibility and practical value through actual applications before investing in dedicated software or infrastructure.
+
+## 2026-11-24 — JH-004: Application question retrieval
+
+Investigated five listings across Ashby and Greenhouse. ChatGPT could retrieve the Greenhouse application questions but failed on all four Ashby forms due to client-side rendering.
+
+Deterministic retrieval appears more promising: Greenhouse offers a documented public API, while Ashby appears to expose an undocumented frontend GraphQL endpoint. Neither mechanism has been tested directly.
+
+Favor ATS-specific HTTP adapters for retrieving and normalizing questions. Reserve LLM usage for answer drafting and defer browser automation until necessary.
+
+Next step: validate both endpoints against the five sample listings before implementing the retrieval layer.
