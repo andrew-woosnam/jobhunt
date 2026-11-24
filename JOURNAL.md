@@ -172,3 +172,9 @@ Going forward, review existing fields and automation responsibilities when intro
 Extend GitHub's role as the source of truth to AI workflow instructions. Store generic prompts in version-controlled Markdown files, with scheduled ChatGPT tasks acting as lightweight entry points that retrieve the current instructions at runtime. Keep schedules, connections and private operational configuration outside the public repository.
 
 Pilot this approach with JH-026. Verify that scheduled execution can retrieve the intended revision, report which revision was used and fail without modifying data if retrieval is unsuccessful. Defer broader migration until validated; no paid LLM API or custom deployment tooling is needed for the proposed approach.
+
+### First drafting run
+
+A manually initiated run of the GitHub-backed task considered five listings and wrote four motivation answers with zero reported write failures. Independent read-back confirmed the reported prompt blob SHA (`ecd77650d1c3a842ce4c0bff87fe2e4837172612`), four persisted drafts on eligible listings, and unique question identities. The drafts were reasonably specific and grounded; routine fields and questions requiring unconfirmed technical experience remained blank. No complete pre-run snapshot was available to independently establish that all unrelated cells were unchanged.
+
+This validates the initial instruction retrieval and drafting path, but not unattended execution, technical-answer quality, repeat-run behavior or retrieval-failure handling. Repeat the run unchanged to check draft preservation and whether unresolved questions impede queue progress. Defer prompt refinement to JH-033.
