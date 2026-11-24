@@ -85,3 +85,19 @@ Deterministic retrieval appears more promising: Greenhouse offers a documented p
 Favor ATS-specific HTTP adapters for retrieving and normalizing questions. Reserve LLM usage for answer drafting and defer browser automation until necessary.
 
 Next step: validate both endpoints against the five sample listings before implementing the retrieval layer.
+
+### Experiment results
+
+Direct retrieval succeeded for Figma (Greenhouse's documented Job Board API) and DuckDuckGo (Ashby's undocumented frontend GraphQL API). Both responses contain job metadata, question wording, field identifiers and types, required flags, and selection options. Some constraints, such as word limits, are expressed in prose.
+
+This validates feasibility for one posting per ATS. The other three Ashby postings and cookie-free request replay remain untested.
+
+Proceed with lightweight ATS-specific adapters. Accept the maintenance risk of Ashby's undocumented interface: retrieval failure should leave the opportunity available for manual application, not block the workflow or be mistaken for a form with no questions. Retain representative responses as test fixtures.
+
+### Prompt injection
+
+The DuckDuckGo application form contains an embedded instruction targeting AI-generated answers. This demonstrates a practical security risk when processing external content with LLMs.
+
+Treat job descriptions, application questions, employer websites and correspondence as untrusted input. Prefer deterministic extraction, restrict model permissions and validate generated outputs before downstream use. Extraction reduces but does not eliminate prompt injection risk.
+
+Investigate proportionate safeguards when implementing LLM-assisted application preparation. Retain this example as a regression test case.
