@@ -147,3 +147,22 @@ Finish and evaluate JH-004's answer-drafting integration first. Then investigate
 The retrieval MVP is implemented, manually validated and committed to GitHub. The original JH-004 scope bundled a completed capability with its operational deployment, downstream integration and product evaluation. Close JH-004 as deterministic question retrieval; track scheduled execution (JH-025), integration with the existing answer-drafting task (JH-026) and real-application evaluation (JH-027) independently.
 
 Prefer backlog tickets with one independently verifiable outcome and explicit dependencies. Prioritize JH-026 now; JH-025 can be verified independently. Known-employer ATS discovery (JH-011) is promoted from parked work as a candidate for deterministic migration, alongside availability verification (JH-001). Avoid speculative infrastructure and paid LLM APIs.
+
+## 2026-11-24 — JH-026: Legacy schema and redundant responsibilities
+
+Reviewing the spreadsheet revealed overlapping responsibilities resulting from incremental development and changing automation requirements.
+
+### Observations
+
+- The legacy `Why This Company & Role?` column in Jobs assumes every application requires a motivation answer. Actual application questions are now retrieved deterministically and stored separately, making this assumption and dedicated column largely obsolete.
+- The Answers tab mixes reusable candidate experience with employer-specific historical answers, blurring the distinction between reference material and application-specific content.
+- Employer `Interest` and `Decision` fields are currently redundant in practice, with a direct correspondence between High/Target and Medium/Consider.
+- Existing scheduled automation instructions retain expectations from earlier iterations of the spreadsheet, creating coupling between schema changes and independently maintained prompts.
+
+### Direction
+
+Establish a single authoritative location for each type of information. Distinguish reusable candidate reference material from answers to specific application questions. Preserve existing content while retiring superseded fields and updating their consumers.
+
+Resolve answer-storage redundancy as part of JH-026 rather than introducing a separate, comprehensive schema redesign. Address employer eligibility and reusable answer organization within their respective backlog tickets.
+
+Going forward, review existing fields and automation responsibilities when introducing replacement functionality. Avoid accumulating parallel mechanisms that serve the same purpose.
