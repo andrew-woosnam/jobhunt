@@ -117,3 +117,17 @@ A standalone CLI would validate retrieval but offer little practical improvement
 Instead, use Google Apps Script to automate deterministic retrieval within the existing spreadsheet-based system. Scheduled ChatGPT tasks will continue handling discovery, evaluation and answer drafting, with Sheets serving as shared persistent state.
 
 This provides meaningful end-to-end automation without introducing hosting, deployment infrastructure or a database migration. Apps Script's built-in services and scheduled triggers incur no additional charge for this workload, subject to consumer-account quotas. Reconsider Go and dedicated infrastructure when demonstrated limitations justify them.
+
+### Implementation results
+
+Implemented ATS-specific retrieval in Google Apps Script, with dedicated spreadsheet tabs for forms and questions. Added incremental processing, duplicate prevention, batched writes and execution logging.
+
+Processed all 33 eligible opportunities in approximately 43 seconds: 24 retrieved forms containing 316 fields, seven HTTP 404 responses, one missing Ashby form and one unsupported URL. Both ATS adapters and empty-queue behavior were validated. Batched writes substantially improved observed execution time, although HTTP timings may also have contributed.
+
+Retrieval also exposes potentially stale postings, suggesting an inexpensive opportunity to improve availability tracking.
+
+### Source control
+
+Use GitHub as the authoritative source for Apps Script code and Google's hosted project as its execution environment. Manage synchronization with Google's clasp CLI; local authentication succeeded. Prefer manual deployment with clasp push for now rather than introducing CI/CD. Keep account credentials and project-specific configuration outside the public repository.
+
+Next: import the working script into GitHub, enable or verify scheduled execution, and integrate the existing answer-drafting automation. Evaluate practical value before further refinement.
