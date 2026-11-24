@@ -38,7 +38,7 @@ Next substantive implementation. Employer approval is a small prerequisite; shar
 | JH-011 | Retrieve postings at approved employers | Google Apps Script retrieves published postings from known Ashby and Greenhouse boards daily, normalizes metadata and persists new postings using stable ATS identities without duplicates or overwriting manual decisions. Start with known board identifiers; keep newly discovered listings pending evaluation rather than prematurely eligible for preparation. Verify repeat execution and isolated board failures; defer additional ATS platforms until warranted. | JH-012 |
 | JH-001 | Verify posting availability | Reuse successful board retrieval under JH-011 to verify unapplied listings daily without redundant requests. Record confirmed closures and their first observation date without losing application history. A failed or incomplete board response, failed form retrieval or uncertain availability is not proof of closure. Verify missing postings, partial failures and preservation of later application states. | JH-011 where supported |
 | JH-030 | Filter obvious listing mismatches | Deterministic filtering excludes clear mismatches using reliable structured constraints; uncertain cases remain eligible for AI evaluation. Preserve manual overrides. | JH-011 |
-| JH-029 | Integrate AI listing fit and priority evaluation | Narrow the existing AI discovery workflow to evaluate new, outstanding postings for technical fit, eligibility, compensation and priority. Explicitly gate form retrieval on suitability and employer eligibility, without requiring per-listing human approval; do not assume Review means evaluated. Preserve manual decisions and verify incremental handoff to retrieval and drafting. Retire replaced discovery/maintenance responsibilities only once their deterministic replacements are validated. | JH-012, JH-030, JH-004; JH-001 for retiring availability checks |
+| JH-029 | Integrate AI listing fit and priority evaluation | Narrow the existing AI discovery workflow to evaluate new, outstanding postings for technical fit, eligibility, compensation and priority. Explicitly gate form retrieval on suitability and employer eligibility, without requiring per-listing human approval; use explicit evaluation evidence rather than a legacy status or mere presence in Listings. Preserve manual decisions and verify incremental handoff to retrieval and drafting. Retire replaced discovery/maintenance responsibilities only once their deterministic replacements are validated. | JH-012, JH-030, JH-004; JH-001 for retiring availability checks |
 
 ### 3. Consolidate remaining AI responsibilities and legacy data
 
@@ -56,8 +56,7 @@ Lower urgency: the existing AI confirmation workflow is useful and should remain
 
 | ID | Improvement | Desired outcome / acceptance criteria | Dependencies |
 |---|---|---|---|
-| JH-013 | Validate email reconciliation | Verify the existing confirmation-email workflow and mailbox access; identify reliably matchable confirmations and cases requiring judgment. Preserve the original application date and avoid ambiguous matches. | — |
-| JH-031 | Migrate unambiguous email reconciliation | Google Apps Script checks relevant confirmations daily and updates only confidently matched existing listings; ambiguous cases remain for review. Validate repeat execution and preservation of later statuses and existing dates before disabling the replaced AI behavior. | JH-013 |
+| JH-031 | Migrate unambiguous email reconciliation | Google Apps Script checks relevant confirmations daily and updates only confidently matched existing listings; ambiguous cases remain for review. Validate row transfer and repeat execution across Listings, Applications and Job History, preservation of later statuses and existing dates, and recovery from partial transfers before disabling the replaced AI behavior. | JH-013 |
 
 Human review, reprioritization, dismissal and application submission remain existing manual operations; no automation ticket is needed for them. Question retrieval and drafting are implemented under JH-004 and JH-026; remaining scheduled-operation checks are tracked separately.
 
@@ -70,7 +69,7 @@ These original tickets are retained for continuity but are not independent deliv
 | ID | Original concern | Treatment |
 |---|---|---|
 | JH-025 | Scheduled application question retrieval | Retrieval implementation is complete under JH-004; original scheduling scope is split into JH-037–JH-039. Operational verification remains outstanding. |
-| JH-002 | Separate posting and application state | Listings now exposes one derived Next Action; Closed/Rejected move to Job History, and Review is retired. Remove hidden To Apply compatibility state when employer approval, listing evaluation and availability replace its eligibility function (JH-012, JH-029, JH-001); preserve application history and deduplicate across active and terminal records. |
+| JH-002 | Separate posting and application state | Schema migration complete: Listings implies unapplied intent, Applications holds ongoing submissions, Job History holds terminal records; Listings Status removed. Remaining operational transitions and employer/listing eligibility are tracked under JH-031, JH-012, JH-029 and JH-001. |
 | JH-005 | Workflow coordination | Move deterministic operations into Google Apps Script incrementally; retain scheduled ChatGPT for research, judgment and drafting. Inspect existing automation responsibilities before replacing them; use Sheets as shared state rather than building a workflow engine. |
 | JH-006 | Identity and deduplication | Address demonstrated identity or matching risks within affected workflows. |
 | JH-007 | Manual edit protection | Preserve manual decisions and approved content in each affected workflow. |
@@ -99,6 +98,10 @@ Material posting change detection is deferred within JH-001 unless stale researc
 Automated application submission and general-purpose agent frameworks remain outside the current scope.
 
 ## Done
+
+### JH-013 — Validate email reconciliation (baseline)
+
+**Completed:** 2026-11-24. Scheduled email sync reported one unambiguous confirmation matched and verified in the tracker; independent read-back confirmed the applied status and original application date. An ambiguous older confirmation was correctly left untouched. This validates the existing mailbox access and baseline matching behavior, not the subsequently introduced cross-tab row transfer. Verify that transition in normal use and under JH-031 before retiring AI reconciliation.
 
 ### JH-032 — Retire legacy listing-specific motivation storage
 
