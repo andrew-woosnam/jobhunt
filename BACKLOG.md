@@ -6,13 +6,7 @@ Prioritize improvements that reduce application effort or increase application t
 
 ## Now
 
-### JH-025 — Verify scheduled application question retrieval
-
-**Status:** Verification pending. Depends on JH-004 (complete).
-
-- [ ] Confirm a time-driven Apps Script trigger is configured.
-- [ ] Verify an unattended execution processes a newly eligible listing and records its outcome without duplicate questions.
-- [ ] Coordinate drafting cadence with retrieval; tolerate delayed processing without losing work.
+No active development ticket; select the next increment from Next.
 
 ## Next
 
@@ -20,6 +14,9 @@ Complete the application preparation increment first, then align the remaining w
 
 | ID | Improvement | Desired outcome / acceptance criteria | Dependencies |
 |---|---|---|---|
+| JH-037 | Confirm question retrieval trigger | Confirm or configure the time-driven Google Apps Script trigger for application question retrieval. | JH-004 |
+| JH-038 | Verify unattended question retrieval | Inspect a successful time-driven execution. An empty-queue run is sufficient initially; confirm newly eligible listings are processed without duplicates during normal use. | JH-037 |
+| JH-039 | Verify retrieval-to-drafting cadence | Confirm the scheduled retrieval and drafting tasks hand off outstanding work across runs without requiring strict ordering or losing delayed work. Adjust cadence only if needed. | JH-038, JH-034 |
 | JH-034 | Verify unattended AI drafting | Inspect a scheduled run for successful current prompt retrieval, matching file SHA and correct incremental processing. No manual initiation required. | JH-026 |
 | JH-035 | Verify fail-closed prompt retrieval | Use a controlled missing-file or failed-retrieval case to confirm the drafting task reports the failure and performs no writes. Avoid disrupting the live schedule or tracker. | JH-026 |
 | JH-036 | Verify drafting prompt-injection resistance | Exercise representative untrusted application-field instructions using sanitized fixtures; confirm the task ignores malicious instructions, does not bypass human checks or disclose private data, and respects its write boundary. | JH-026 |
@@ -36,7 +33,7 @@ Complete the application preparation increment first, then align the remaining w
 | JH-032 | Retire legacy listing-specific motivation storage | Preserve existing motivation answers, update remaining consumers and remove the superseded Jobs motivation column once drafting against actual questions is validated. | JH-026 |
 | JH-016 | Improve candidate context and answer reuse | Retrieve relevant professional experience and previous answers without repeatedly researching or drafting from scratch. Keep private candidate information outside the public repository. | Reassess after JH-027 |
 
-Human review, reprioritization, dismissal and application submission remain existing manual operations; no automation ticket is needed for them. Question retrieval and drafting are covered by JH-004, JH-025 and JH-026.
+Human review, reprioritization, dismissal and application submission remain existing manual operations; no automation ticket is needed for them. Question retrieval and drafting are implemented under JH-004 and JH-026; remaining scheduled-operation checks are tracked separately.
 
 Prefer shared ATS retrieval for discovery and availability verification. Verify access before migrating email reconciliation. Retire superseded scheduled-task responsibilities only after their replacements are validated. Reassess delivery order after JH-027; avoid speculative infrastructure.
 
@@ -46,6 +43,7 @@ These original tickets are retained for continuity but are not independent deliv
 
 | ID | Original concern | Treatment |
 |---|---|---|
+| JH-025 | Scheduled application question retrieval | Retrieval implementation is complete under JH-004; original scheduling scope is split into JH-037–JH-039. Operational verification remains outstanding. |
 | JH-002 | Separate posting and application state | Make only the schema adjustments needed by employer approval, listing evaluation and availability verification (JH-012, JH-029, JH-001); preserve existing application progress. |
 | JH-005 | Workflow coordination | Move deterministic operations into Google Apps Script incrementally; retain scheduled ChatGPT for research, judgment and drafting. Inspect existing automation responsibilities before replacing them; use Sheets as shared state rather than building a workflow engine. |
 | JH-006 | Identity and deduplication | Address demonstrated identity or matching risks within affected workflows. |
