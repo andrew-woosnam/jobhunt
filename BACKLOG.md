@@ -32,6 +32,7 @@ Complete the application preparation increment first, then align the remaining w
 
 | ID | Improvement | Desired outcome / acceptance criteria | Dependencies |
 |---|---|---|---|
+| JH-033 | Refine application drafting prompts | After baseline validation, allow targeted retrieval of documented candidate evidence; keep the bootstrap limited to retrieval, private configuration and authorization. Simplify workflow instructions around outcomes and completion criteria; distinguish question-level blockers from systemic failures, continue useful work and avoid blocked listings monopolizing the budget. Preserve grounding, prompt-injection safeguards, identity checks, non-overwrite and read-back verification. Compare representative outputs before/after; add examples or persistent state only for observed failures. | JH-026 |
 | JH-027 | Evaluate application preparation | Use drafts in three to five real applications; record answer quality, time savings and remaining friction in the journal. No dedicated evaluation framework. | JH-026 |
 | JH-028 | Discover new employers for approval | A scheduled ChatGPT task researches and deduplicates prospective employers two or three times weekly, plus ad hoc, and records candidates for human review without automatically approving them. | JH-012's approval semantics |
 | JH-012 | Formalize employer approval | Establish unambiguous, revisable employer approval/exclusion in the existing tracker. Unreviewed employers do not enter deterministic board discovery. Preserve history when decisions change. | — |
