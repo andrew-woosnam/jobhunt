@@ -31,10 +31,30 @@ This is first and foremost a tool to support my own job search. Its effectivenes
 - **Resource efficiency:** Avoid redundant computation, unnecessary inference and idle infrastructure.
 - **Human agency:** Automate repetitive work rather than consequential decisions.
 
+## Current architecture
+
+- **Google Sheets:** Operational data store and user interface.
+- **Google Drive and Gmail:** Candidate materials and employer correspondence.
+- **Scheduled ChatGPT workflows:** Discovery, evaluation, answer drafting and correspondence reconciliation.
+- **Google Apps Script:** Deterministic application form retrieval for Ashby and Greenhouse, with incremental processing, persistent retrieval status and execution logging.
+- **GitHub:** Authoritative source for code and project documentation.
+
+## Development and deployment
+
+Apps Script source and its manifest live in [`apps-script/`](apps-script/). Google hosts and executes the script; the repository is the source of truth. Use Google's [clasp CLI](https://developers.google.com/apps-script/guides/clasp) to synchronize local source with an existing Apps Script project.
+
+One-time setup: install `@google/clasp`, enable the Apps Script API, authenticate with `clasp login`, and configure a local `.clasp.json` for the target project. Keep project-specific configuration and credentials out of Git.
+
+After reviewing and committing changes, deploy from the repository root:
+
+```sh
+git pull --ff-only && (cd apps-script && clasp push)
+```
+
+Manage scheduled triggers, authorization and execution history in Apps Script. Avoid editing source in the hosted editor because subsequent pushes replace the remote source. Automated deployment is deferred.
+
 ## Project status
 
-Early-stage planning and incremental development.
+Application question retrieval is implemented and manually validated for both supported ATS platforms. Scheduled execution and integration with automated answer drafting remain to be verified. Development focuses on observed limitations rather than wholesale replacement of functional components.
 
-The existing system uses Google Sheets, Drive, Gmail and scheduled ChatGPT workflows. Development will focus on addressing observed limitations rather than replacing functional components wholesale.
-
-See the [engineering journal](JOURNAL.md) for design decisions, experiments, tradeoffs and results.
+See the [engineering journal](JOURNAL.md) for design decisions and results, and the [backlog](BACKLOG.md) for current priorities.
