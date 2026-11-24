@@ -39,6 +39,42 @@ This is first and foremost a tool to support my own job search. Its effectivenes
 - **Google Apps Script:** Deterministic application form retrieval for Ashby and Greenhouse, with incremental processing, persistent retrieval status and execution logging.
 - **GitHub:** Authoritative source for code and project documentation.
 
+## Intended workflow
+
+The goal is a continuously maintained queue of current, prioritized, application-ready opportunities. The following is the target workflow, not a description of functionality already implemented.
+
+| Operation | Executor | Target cadence |
+|---|---|---|
+| Discover and research new employers | AI | Two or three times per week, plus ad hoc |
+| Approve or exclude employers | Human | As needed |
+| Retrieve postings from approved employers, normalize and deduplicate them, and filter obvious mismatches | Apps Script | Daily |
+| Evaluate new listings for technical fit, eligibility, compensation tradeoffs and priority | AI | Daily |
+| Retrieve actual application questions for suitable, previously unprocessed listings | Apps Script | Daily |
+| Draft substantive answers using candidate evidence and employer context | AI | Daily |
+| Review, reprioritize, dismiss or submit applications | Human | As needed |
+| Reconcile unambiguous application confirmations | Apps Script | Daily |
+| Verify continued availability of unapplied listings | Apps Script | Daily, preferably during board retrieval |
+
+```mermaid
+flowchart TD
+    A["AI: Discover employers"] --> B["Human: Approve employers"]
+    B --> C["GAS: Retrieve, deduplicate and filter listings"]
+    C --> D["AI: Evaluate fit and priority"]
+    D --> E["GAS: Retrieve application questions"]
+    E --> F["AI: Draft substantive answers"]
+    F --> G["Human: Review and apply"]
+    G --> H["GAS: Reconcile confirmations"]
+    C --> I["GAS: Verify posting availability"]
+    I --> J["Update opportunity queue"]
+    H --> J
+```
+
+**Eligibility and filtering.** Employer approval is a human decision. Use deterministic filtering for clear mismatches and reliable structured constraints; leave ambiguous cases for AI evaluation. Suitable listings can proceed to application preparation without mandatory individual approval. The user retains control over whether to apply.
+
+**State and coordination.** Sheets is the shared persistent state. Each operation processes outstanding work, preserves existing decisions and avoids duplicate processing. Employer eligibility, listing suitability, availability, preparation progress and application lifecycle are distinct concepts; introduce separate fields only when implementation requires them. Confirmed posting closures should leave application history intact. A failed form request, network error or ambiguous redirect is not proof of closure.
+
+**Execution boundaries.** Prefer Apps Script for retrieval, filtering, validation and bookkeeping; retain scheduled ChatGPT tasks for open-ended research, nuanced judgment and writing. Defer unsupported or ambiguous cases to AI-assisted or manual review as appropriate. Cadences are approximate, not strict dependencies: a downstream operation can pick up newly available records on its next run. No paid LLM API or additional orchestration infrastructure is required for this design.
+
 ## Development and deployment
 
 Apps Script source and its manifest live in [`apps-script/`](apps-script/). Google hosts and executes the script; the repository is the source of truth. Use Google's [clasp CLI](https://developers.google.com/apps-script/guides/clasp) to synchronize local source with an existing Apps Script project.
