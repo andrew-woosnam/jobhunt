@@ -1,109 +1,73 @@
 # Backlog
 
-Authoritative project backlog. Prioritize application throughput, correctness and reduced manual effort; use portfolio value as a tiebreaker.
+Prioritize improvements that reduce application effort or increase application throughput, accounting for development and maintenance costs. See [JOURNAL.md](JOURNAL.md) for the rationale.
 
-**Priority:** P0 = direct application friction; P1 = meaningful reliability or productivity improvement; P2 = secondary improvement; P3 = optional enhancement.
+**Now** is the current focus; **Next** contains candidate improvements in approximate priority order; **Parked** contains ideas to revisit only when actual usage warrants them. Preserve ticket IDs, including consolidated tickets. Add acceptance criteria when selecting work for implementation. Record verified outcomes in Done.
 
-**Workflow:** Investigate → Ready → In progress → Done. Blocked and Deferred as needed. Keep ticket IDs stable. Add acceptance criteria before implementation; mark work done only after verification. Record consequential decisions and results in [JOURNAL.md](JOURNAL.md).
+## Now
 
-## In progress
+### JH-004 — Prepare application answers in advance
 
-None.
+**Status:** Ready for experiment
 
-## Ready
+Repeated AI interactions to draft application answers are the largest recurring source of friction. Determine whether application questions can be retrieved and answered ahead of time using existing tools.
 
-### JH-001 — One-click tracker refresh
+**Experiment:**
 
-**P0 · Product, reliability**
+- [ ] Select three to five actionable opportunities.
+- [ ] Retrieve their actual application questions where accessible; identify any inaccessible forms.
+- [ ] Prepare grounded, tailored drafts using existing candidate information and previous answers.
+- [ ] Store drafts somewhere convenient for application submission.
+- [ ] Apply to the selected opportunities and assess time savings, answer quality and remaining friction.
 
-Observed: a potentially closed posting remained marked for application. The tracker should be current before an application session begins.
+Record findings in the journal. Do not build generalized extraction or processing infrastructure until the experiment demonstrates a need.
 
-**Acceptance criteria:**
+## Next
 
-- [ ] Initiate a refresh of actionable postings with one action.
-- [ ] Verify availability using authoritative employer or ATS sources.
-- [ ] Distinguish open, closed and unknown availability from application progress (JH-002).
-- [ ] Distinguish confirmed closure from a failed verification; retain the last known availability on transient failure.
-- [ ] Record successful verification timestamps; do not represent failed checks as successful.
-- [ ] Detect material posting changes where source data supports comparison; flag affected research for review.
-- [ ] Preserve manual decisions, notes and approved answers.
-- [ ] Safely rerun after partial failure without duplicate records or unintended changes.
-- [ ] Report checked, changed, closed and failed records.
-- [ ] Test representative open, closed, changed and unavailable source responses.
-- [ ] Keep the refresh logic callable by a future scheduled trigger.
+| ID | Improvement | Desired outcome |
+|---|---|---|
+| JH-012 | Simplify employer and listing eligibility | New suitable listings from approved employers enter the actionable queue without redundant manual approval. Employer decisions remain revisable; individual listings retain independent fit rankings, dismissal and deprioritization options. Preserve history when eligibility changes. |
+| JH-016 | Improve candidate context and answer reuse | Retrieve relevant professional experience and previous answers without repeatedly researching or drafting from scratch. Keep private candidate information outside the public repository. |
+| JH-013 | Validate email reconciliation | Evaluate the existing confirmation-email workflow and correct demonstrated gaps. Unambiguous confirmations update the correct application record and submission date; ambiguous matches remain for review. |
+| JH-001 | Automatically identify closed postings | Use existing automation where adequate to verify actionable postings and remove confirmed closures from the active queue without deleting records or losing application history. Record the date closure was first observed, not an assumed actual closure date. Verification failures must not be treated as closures. |
 
-Select the execution environment against this workflow. JH-002 is part of the initial delivery, not a separate infrastructure project.
+Reassess this order after the application preparation experiment. Scope each improvement to the smallest useful outcome.
 
-### JH-002 — Separate posting and application state
+## Consolidated / supporting work
 
-**P0 · Technical debt, correctness**
+These original tickets are retained for continuity but are not independent deliverables. Address their concerns within relevant features only when warranted.
 
-Observed: the same Status field represents both posting closure and personal application progress.
+| ID | Original concern | Treatment |
+|---|---|---|
+| JH-002 | Separate posting and application state | Make only the schema adjustments needed by JH-012 and JH-001; preserve existing application progress. |
+| JH-005 | Workflow coordination | Inspect relevant existing automations before changing their responsibilities or introducing additional writers. |
+| JH-006 | Identity and deduplication | Address demonstrated identity or matching risks within affected workflows. |
+| JH-007 | Manual edit protection | Preserve manual decisions and approved content in each affected workflow. |
+| JH-008 | Retry and partial failure recovery | Handle concrete failure modes within affected workflows; avoid generic retry infrastructure. |
+| JH-009 | Data validation | Structure and validate fields as needed for actual filtering or automated updates. |
+| JH-010 | Automation visibility | Use lightweight execution summaries and actionable errors where needed. |
+| JH-014 | Incremental processing | Incorporate into JH-016 where it reduces redundant research or inference. |
+| JH-015 | AI output quality | Evaluate grounding and practical answer quality within JH-004 before considering dedicated evaluation tooling. |
+| JH-018 | Scheduled refresh | Incorporate into JH-001 using existing scheduling where adequate. |
+| JH-019 | Outcome measurement | Record informal time savings and observed friction in the journal. No dedicated analytics implementation. |
 
-**Acceptance criteria:**
+Material posting change detection is deferred within JH-001 unless stale research becomes a meaningful problem.
 
-- [ ] Represent posting availability independently of application status.
-- [ ] Preserve existing records and decisions; flag ambiguous legacy states rather than guessing.
-- [ ] Keep an applied job's application status intact when its posting closes.
-- [ ] Distinguish verification, material change, status change and submission timestamps where needed.
-- [ ] Maintain usable filtering and sorting in the existing Sheets interface.
+## Parked
 
-### JH-003 — One-click application bookkeeping
+| ID | Improvement | Revisit when |
+|---|---|---|
+| JH-003 | One-click application bookkeeping | Email reconciliation leaves significant manual bookkeeping. |
+| JH-011 | Systematic employer discovery | The existing discovery workflow fails to supply enough suitable opportunities. |
+| JH-017 | Application material access | Locating resumes or supporting materials becomes recurring friction. |
+| JH-020 | Feedback-informed discovery | Repeated unsuitable recommendations demonstrate a discovery-quality problem. |
+| JH-021 | Targeted preparation and resume tailoring | A standard resume or existing answer-preparation workflow is insufficient. |
+| JH-022 | Durable asynchronous orchestration | Simple execution demonstrably fails to meet reliability or duration requirements. |
+| JH-023 | Dedicated database | Sheets materially impedes consistency, queryability or state management. |
+| JH-024 | Custom frontend | The existing interface materially limits application throughput. |
 
-**P0 · Product, correctness**
-
-Reduce manual work after applying or dismissing an opportunity. A deliberate user action should update the relevant state and timestamps together.
-
-**Acceptance criteria:**
-
-- [ ] Mark an opportunity applied with one action, recording its submission timestamp.
-- [ ] Repeated actions do not silently overwrite the original submission timestamp.
-- [ ] Support intentional corrections and preserve unrelated fields.
-- [ ] Keep submission itself manual.
-
-Depends on JH-002.
-
-## Needs investigation
-
-Items below are candidates, not commitments. Distinguish observed deficiencies from unverified risks during triage.
-
-| ID | Priority | Ticket | Problem / desired outcome |
-|---|---|---|---|
-| JH-004 | P0 | Application readiness | Observed missing motivation answers across the actionable queue. Identify why; reliably provide concise fit research and grounded drafts before review. |
-| JH-005 | P1 | Audit workflow coordination | Inspect existing scheduled tasks, dependencies, overlap, failure behavior and ownership. Replace prompt-based orchestration with deterministic logic where useful. |
-| JH-006 | P1 | Identity and deduplication | Establish stable posting identifiers and safe upsert behavior. Investigate duplicate and wrong-row update risks. |
-| JH-007 | P1 | Manual edit protection | Define human-owned and machine-owned fields. Test preservation of approved content and deliberate decisions across reruns. |
-| JH-008 | P1 | Retry and partial failure recovery | Establish actual failure modes; ensure completed work survives interruptions and failed records can be retried independently where justified. |
-| JH-009 | P1 | Data validation | Observed eligibility and fit details embedded in notes. Structure only information needed for filtering, validation or automated decisions; retain useful narrative context. |
-| JH-010 | P1 | Automation visibility | Surface last successful run, record counts and actionable errors. Prefer lightweight summaries over a monitoring subsystem. |
-| JH-011 | P1 | Systematic employer discovery | Measure coverage; use the existing Companies registry to poll known employer ATS boards. Retain exploratory AI research for unfamiliar employers. |
-| JH-012 | P1 | Queue prioritization | Keep actionable opportunities prominent; account for freshness, fit, readiness and personal preferences without overriding human rankings. |
-| JH-013 | P1 | Correspondence reconciliation | Audit current Gmail sync. Deduplicate messages, match confirmations and subsequent developments to the correct application, and flag ambiguity. |
-| JH-014 | P2 | Incremental processing | Investigate repeated employer research and inference. Reuse verified context and evaluate only new, changed or incomplete records as appropriate. |
-| JH-015 | P2 | AI output quality | Establish representative, synthetic evaluation cases for factual grounding, eligibility, fit and answer quality. Validate structured outputs and measure quality, latency and cost. |
-| JH-016 | P2 | Configuration and candidate context | Inventory scattered prompts, preferences and professional experience sources. Establish clear ownership and versioned, reusable context without publishing private data. |
-| JH-017 | P2 | Application material access | Reduce time spent locating relevant resumes, experience notes and reusable answers; link supporting Drive materials from job records where useful. |
-| JH-018 | P2 | Scheduled refresh | Schedule the verified JH-001 workflow after manual use proves reliable. Avoid overlapping writers and unnecessary repeated checks. |
-| JH-019 | P2 | Outcome measurement | Establish a lightweight baseline for applications submitted, preparation time, stale-posting encounters and automation failures. Measure improvement without burdensome tracking. |
-| JH-020 | P3 | Feedback-informed discovery | Investigate whether recurring dismissal reasons should inform subsequent filtering and AI evaluation. No fine-tuning required. |
-| JH-021 | P3 | Targeted preparation | Generate additional answers and tailored resume content on demand; consider Docs templates only if formatting becomes recurring friction. |
-
-## Deferred
-
-| ID | Priority | Ticket | Revisit when |
-|---|---|---|---|
-| JH-022 | P3 | Durable asynchronous orchestration | Simple execution and persisted state no longer provide adequate retry, duration or concurrency guarantees. |
-| JH-023 | P3 | Dedicated database | Sheets demonstrably impedes consistency, queryability or state management. |
-| JH-024 | P3 | Custom frontend | The existing interface materially limits application throughput or usability. |
-
-Automated application submission and general-purpose agent frameworks are outside the current scope.
+Automated application submission and general-purpose agent frameworks remain outside the current scope.
 
 ## Done
 
 None.
-
-## Triage
-
-First deliver JH-001 and JH-002 as a small end-to-end improvement; JH-003 and JH-004 are the next candidates. Incorporate the reliability work needed for each delivery rather than building generic infrastructure up front. Investigate JH-005 early to avoid conflicting automation writes.
-
-Reassess priorities after real application sessions. Preserve Google Sheets, Drive and Gmail unless evidence warrants replacing them.
