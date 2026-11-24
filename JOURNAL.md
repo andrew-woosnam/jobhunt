@@ -109,3 +109,11 @@ Cookie-free HTTP requests successfully retrieved application forms for all four 
 Eight substantive written questions were identified across three postings. The other two require no bespoke written answers, demonstrating an opportunity to avoid unnecessary LLM inference.
 
 Retrieval feasibility is established. Accept the maintenance risk of Ashby's undocumented API and proceed with a minimal implementation that degrades gracefully.
+
+### Implementation direction
+
+A standalone CLI would validate retrieval but offer little practical improvement over manually copying application questions.
+
+Instead, use Google Apps Script to automate deterministic retrieval within the existing spreadsheet-based system. Scheduled ChatGPT tasks will continue handling discovery, evaluation and answer drafting, with Sheets serving as shared persistent state.
+
+This provides meaningful end-to-end automation without introducing hosting, deployment infrastructure or a database migration. Apps Script's built-in services and scheduled triggers incur no additional charge for this workload, subject to consumer-account quotas. Reconsider Go and dedicated infrastructure when demonstrated limitations justify them.
