@@ -6,12 +6,7 @@ Prioritize improvements that reduce application effort or increase application t
 
 ## Now
 
-### JH-043 — Derive application priority from fit and preparation
-
-- [ ] Preserve legacy ratings as editable Fit (Strong, Good, Stretch); do not imply fresh evaluation.
-- [ ] Derive Listings Priority from Fit and Automated Preparation: Strong 1/2/2, Good 2/3/3, Stretch 3/4/4 (Complete/Partial/Pending). Leave unrated listings unranked.
-- [ ] Update discovery, drafting, retrieval and row-transfer consumers; prioritize automated preparation by Fit rather than derived Priority.
-- [ ] Verify live migration, all matrix cases and preservation of historical ratings. Record deployment and unattended verification boundaries.
+No active development ticket; select the next increment from Next.
 
 ## Next
 
@@ -43,7 +38,7 @@ Next substantive implementation. Employer approval is a small prerequisite; shar
 | JH-011 | Retrieve postings at approved employers | Google Apps Script retrieves published postings from known Ashby and Greenhouse boards daily, normalizes metadata and persists new postings using stable ATS identities without duplicates or overwriting manual decisions. Start with known board identifiers; keep newly discovered listings pending evaluation rather than prematurely eligible for preparation. Verify repeat execution and isolated board failures; defer additional ATS platforms until warranted. | JH-012 |
 | JH-001 | Verify posting availability | Reuse successful board retrieval under JH-011 to verify unapplied listings daily without redundant requests. Record confirmed closures and their first observation date without losing application history. A failed or incomplete board response, failed form retrieval or uncertain availability is not proof of closure. Verify missing postings, partial failures and preservation of later application states. | JH-011 where supported |
 | JH-030 | Filter obvious listing mismatches | Deterministic filtering excludes clear mismatches using reliable structured constraints; uncertain cases remain eligible for AI evaluation. Preserve manual overrides. | JH-011 |
-| JH-029 | Integrate AI listing fit and priority evaluation | Narrow the existing AI discovery workflow to evaluate new, outstanding postings for technical fit, eligibility, compensation and priority. Explicitly gate form retrieval on suitability and employer eligibility, without requiring per-listing human approval; use explicit evaluation evidence rather than a legacy status or mere presence in Listings. Preserve manual decisions and verify incremental handoff to retrieval and drafting. Retire replaced discovery/maintenance responsibilities only once their deterministic replacements are validated. | JH-012, JH-030, JH-004; JH-001 for retiring availability checks |
+| JH-029 | Integrate AI listing fit and priority evaluation | Narrow the existing AI discovery workflow to evaluate new, outstanding postings for Fit, eligibility and compensation; keep the deterministic application Priority formula from JH-043. Explicitly gate form retrieval on suitability and employer eligibility, without requiring per-listing human approval; use explicit evaluation evidence rather than a legacy status or mere presence in Listings. Preserve manual decisions and verify incremental handoff to retrieval and drafting. Retire replaced discovery/maintenance responsibilities only once their deterministic replacements are validated. | JH-012, JH-030, JH-004; JH-001 for retiring availability checks |
 
 ### 3. Consolidate remaining AI responsibilities and legacy data
 
@@ -103,6 +98,15 @@ Material posting change detection is deferred within JH-001 unless stale researc
 Automated application submission and general-purpose agent frameworks remain outside the current scope.
 
 ## Done
+
+### JH-043 — Derive application priority from fit and preparation
+
+- [x] Preserve legacy ratings as editable Fit (Strong, Good, Stretch); do not imply fresh evaluation.
+- [x] Derive Listings Priority from Fit and Automated Preparation: Strong 1/2/2, Good 2/3/3, Stretch 3/4/4 (Complete/Partial/Pending). Leave unrated listings unranked.
+- [x] Update discovery, drafting, retrieval and row-transfer consumers; prioritize automated preparation by Fit rather than derived Priority.
+- [x] Verify live migration, all matrix cases and preservation of historical ratings. Record deployment and unattended verification boundaries.
+
+**Completed:** 2026-11-24 (schema, formula and consumer implementation). Migrated all 46 existing ratings by 1→Strong, 2→Good, 3→Stretch without re-evaluation. Verified all 33 live listing priorities and all nine matrix cases plus blank/invalid inputs. Added conditional cell coloring to Fit, Automated Preparation and lifecycle Status, and centered Priority. Updated and verified all three scheduled prompts, the versioned drafting prompt and Apps Script source; deploy Apps Script with clasp to enable Fit-ordered retrieval. Unattended runs and native visual rendering remain unverified.
 
 ### JH-013 — Validate email reconciliation (baseline)
 
