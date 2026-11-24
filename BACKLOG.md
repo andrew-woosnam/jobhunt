@@ -122,7 +122,7 @@ Automated application submission and general-purpose agent frameworks remain out
 - [x] Backfill existing questions without overwriting drafts; verify representative no-bespoke-question, complete-draft, partial-draft, blocked, failed and unsupported cases against the live formula results.
 - [x] Update the versioned drafting prompt and its runtime authorization boundary; instruct the discovery task to copy the formula for new and manually added job rows.
 
-Ready means bespoke written preparation is complete, not that the posting is open, the applicant is eligible, or routine form inputs have been filled. Failure or inconsistent retrieval counts never imply readiness. Existing Apps Script writes remain compatible; no deployment required for this increment. See the journal for verification and remaining limitations.
+The current Listings field is Automated Preparation: Complete, Partial or Pending. Complete means all bespoke questions have been addressed, not that the posting is open, the applicant is eligible, or routine form inputs have been filled. Pending takes precedence while further automated work remains; Partial includes failed/unsupported retrieval and unresolved questions requiring human input once automatic work is exhausted. Failure or inconsistent retrieval counts never imply readiness. Existing Apps Script writes remain compatible; no deployment required for this increment. See the journal for verification and remaining limitations.
 
 ### JH-026 — Integrate drafting with retrieved application questions (MVP / 26.1)
 
