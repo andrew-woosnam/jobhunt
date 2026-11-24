@@ -31,12 +31,12 @@ Retain existing motivation answers as context; do not generate speculative answe
 |---|---|---|
 | JH-027 | Evaluate application preparation | After JH-026, use drafts in three to five real applications; record answer quality, time savings and remaining friction in the journal. No dedicated evaluation framework. |
 | JH-012 | Simplify employer and listing eligibility | New suitable listings from approved employers enter the actionable queue without redundant manual approval. Employer decisions remain revisable; individual listings retain independent fit rankings, dismissal and deprioritization options. Preserve history when eligibility changes. |
-| JH-011 | Discover postings at known employers | Retrieve new postings from supported ATS boards in GAS; start with known board identifiers and deterministic normalization/deduplication. Broad employer discovery remains AI-assisted. Split into smaller deliverables when selected. |
+| JH-011 | Discover postings at known employers | Retrieve new postings from supported ATS boards in Google Apps Script; start with known board identifiers and deterministic normalization/deduplication. Broad employer discovery remains AI-assisted. Split into smaller deliverables when selected. |
 | JH-001 | Automatically identify closed postings | Verify availability using deterministic ATS retrieval where supported; record confirmed closures and their first observation date without losing application history. Retrieval failures do not establish closure. |
 | JH-016 | Improve candidate context and answer reuse | Retrieve relevant professional experience and previous answers without repeatedly researching or drafting from scratch. Keep private candidate information outside the public repository. |
 | JH-013 | Validate email reconciliation | Evaluate the existing confirmation-email workflow and correct demonstrated gaps. Unambiguous confirmations update the correct application record and submission date; ambiguous matches remain for review. |
 
-Reassess this order after JH-027. Prefer shared ATS retrieval for JH-011 and JH-001. Verify mailbox access before migrating JH-013 to GAS. Scope each improvement to the smallest useful outcome.
+Reassess this order after JH-027. Prefer shared ATS retrieval for JH-011 and JH-001. Verify mailbox access before migrating JH-013 to Google Apps Script. Scope each improvement to the smallest useful outcome.
 
 ## Consolidated / supporting work
 
@@ -45,7 +45,7 @@ These original tickets are retained for continuity but are not independent deliv
 | ID | Original concern | Treatment |
 |---|---|---|
 | JH-002 | Separate posting and application state | Make only the schema adjustments needed by JH-012 and JH-001; preserve existing application progress. |
-| JH-005 | Workflow coordination | Move deterministic operations into GAS incrementally; retain scheduled ChatGPT for research, judgment and drafting. Inspect existing automation responsibilities before replacing them; use Sheets as shared state rather than building a workflow engine. |
+| JH-005 | Workflow coordination | Move deterministic operations into Google Apps Script incrementally; retain scheduled ChatGPT for research, judgment and drafting. Inspect existing automation responsibilities before replacing them; use Sheets as shared state rather than building a workflow engine. |
 | JH-006 | Identity and deduplication | Address demonstrated identity or matching risks within affected workflows. |
 | JH-007 | Manual edit protection | Preserve manual decisions and approved content in each affected workflow. |
 | JH-008 | Retry and partial failure recovery | Handle concrete failure modes within affected workflows; avoid generic retry infrastructure. |
@@ -79,7 +79,7 @@ Automated application submission and general-purpose agent frameworks remain out
 **Completed:** 2026-11-24. Original application preparation scope split into JH-025, JH-026 and JH-027.
 
 - [x] Validate direct retrieval against representative Ashby and Greenhouse postings.
-- [x] Implement normalized form and question retrieval in GAS, with persistent retrieval status, incremental processing, duplicate prevention and logging.
+- [x] Implement normalized form and question retrieval in Google Apps Script, with persistent retrieval status, incremental processing, duplicate prevention and logging.
 - [x] Run against the eligible queue and record successful retrievals and failures: 24 forms and 316 fields across 33 eligible opportunities; remaining nine recorded as failed or unsupported.
 - [x] Verify empty-queue behavior and commit the working script to GitHub.
 
