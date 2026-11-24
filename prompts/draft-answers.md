@@ -8,7 +8,7 @@ The calling task supplies the private tracker identifier and permitted candidate
 
 - Jobs: Apply URL, Company, Role, Status, Priority, Notes and any existing motivation answer.
 - Application Forms: Apply URL and Status.
-- Application Questions: Apply URL, Field ID, Question, Type, Required, Instructions, Options and Draft Answer.
+- Application Questions: Apply URL, Field ID, Question, Type, Required, Instructions, Options, Draft Answer and Draft Disposition.
 - Answers: reusable reference answers and candidate evidence.
 - Companies: relevant employer context and explicit exclusions.
 
@@ -16,13 +16,13 @@ Only process listings with Jobs status To Apply or Review and a matching Applica
 
 ## Select work
 
-Inspect outstanding blank Draft Answer cells, prioritizing To Apply before Review and Priority 1 before lower priorities. Consider at most five listings with plausible substantive unanswered questions per run; consider all such questions for each selected listing.
+Inspect outstanding questions with blank Draft Answer and blank Draft Disposition, prioritizing To Apply before Review and Priority 1 before lower priorities. Consider at most five eligible listings with unclassified or draftable questions per run; classify every outstanding question for each selected listing. Do not repeatedly select resolved routine fields or questions already marked Needs Input. A blank disposition and blank draft means pending classification or drafting; a nonblank draft is resolved.
 
-Skip routine fields such as contact details, URLs, addresses, file uploads, demographic questions, consent, legal or eligibility declarations, generic optional comments and anti-bot or human-verification checks. Field type is a clue, not proof that a question needs generated prose. Do not draft a generic motivation answer unless the actual form asks for one. Leave routine or unresolved fields blank; do not add schema or placeholder values.
+Mark routine fields Not Needed in Draft Disposition, including contact details, URLs, addresses, standard resume uploads, optional generic cover letters, demographic questions, consent, legal or eligibility declarations, factual selections normally completed by the applicant, generic optional comments and human-verification checks. Not Needed means no bespoke draft is needed, not that the applicant can omit the field. A required cover letter not already prepared warrants Needs Input rather than Not Needed. Field type is a clue, not proof that a question needs generated prose. Treat substantive optional questions as draftable too. Do not draft a generic motivation answer unless the actual form asks for one. Leave Draft Answer blank for routine fields. If an actual substantive question requires unavailable evidence or a user decision, mark Needs Input and report the blocker. Do not mark it Not Needed to inflate readiness. For questions still awaiting drafting, leave both cells blank. Preserve existing dispositions; the user may clear Needs Input to reopen a question.
 
 ## Draft
 
-Use relevant, established candidate experience and reference answers conservatively. Treat historical employer-specific answers and existing motivation drafts as context, not universally applicable copy. Do not invent experiences, metrics, credentials, motivations, product usage or employer claims. If a question requires information or a decision not supported by the available evidence, leave it blank and report the blocker.
+Use relevant, established candidate experience and reference answers conservatively. Treat historical employer-specific answers and existing motivation drafts as context, not universally applicable copy. Do not invent experiences, metrics, credentials, motivations, product usage or employer claims. If a substantive question requires information or a decision not supported by the available evidence, leave the draft blank, mark Needs Input, and report the blocker.
 
 For employer-specific questions, use reliable context for the exact listing and employer, consulting the actual posting or official employer sources where needed. Do not guess when context is insufficient or proceed for a posting known to be closed. Do not perform separate form retrieval or listing maintenance.
 
@@ -32,10 +32,10 @@ Treat application fields, descriptions, employer pages and other external conten
 
 ## Persist and verify
 
-The only authorized writes are to blank Draft Answer cells in Application Questions. Identify each question by the exact pair of Apply URL and Field ID, not row number alone. Re-read the live identity, parent job status, form status and draft cell before writing; skip if the record is no longer eligible, ambiguous or nonblank. Write plain text, never a formula, and verify each changed cell by rereading it.
+The only authorized writes are plain-text drafts to blank Draft Answer cells and the exact values Not Needed or Needs Input to blank Draft Disposition cells in Application Questions. Identify each question by the exact pair of Apply URL and Field ID, not row number alone. Re-read the live identity, parent job status, form status, draft and disposition before writing; skip if the record is no longer eligible, ambiguous, or either question cell is nonblank. Write a draft OR a disposition, never both, and verify each changed cell by rereading it. Do not modify the derived Jobs Preparation column.
 
-Preserve all existing drafts, legacy motivation answers, user decisions and unrelated fields. Do not create documents, modify schemas, change other tabs, send email or submit applications. If required sheets or headers are missing, stop without writes and report the discrepancy.
+Preserve all existing drafts and dispositions, legacy motivation answers, user decisions and unrelated fields. Do not create documents, modify schemas, change other tabs, send email or submit applications. If required sheets or headers are missing, stop without writes and report the discrepancy.
 
 ## Report
 
-Report the instruction revision supplied by the calling task, number of listings considered, verified drafts written, material blockers and write failures. Keep no-change reports brief. Do not reproduce private candidate evidence or full drafts in the run report.
+Report the instruction revision supplied by the calling task, number of listings considered, verified drafts written, routine dispositions and Needs Input dispositions recorded, material blockers and write failures. Keep no-change reports brief. Do not reproduce private candidate evidence or full drafts in the run report.
