@@ -11,7 +11,7 @@
 - Prioritize application throughput and reduced manual effort over portfolio value.
 - Retain Google Sheets, Drive and Gmail unless demonstrated limitations justify replacement.
 - Use deterministic logic for orchestration, validation, deduplication and state management; use LLMs where judgment or language processing adds value.
-- Prefer GAS for deterministic scheduled operations; retain existing ChatGPT tasks for judgment-intensive work. Do not introduce a paid LLM API without explicit authorization.
+- Prefer Google Apps Script for deterministic scheduled operations; retain existing ChatGPT tasks for judgment-intensive work. Do not introduce a paid LLM API without explicit authorization.
 - Do not implement speculative requirements from unrelated or deferred backlog items.
 - Keep application submissions, withdrawals and ambiguous status changes under human control.
 
