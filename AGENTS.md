@@ -25,6 +25,7 @@
 
 ## Project maintenance
 
+- Before each commit, review README.md against the changes being committed. Update it in the same commit if the changes materially affect documented functionality, architecture, setup, usage or project status; otherwise leave it unchanged.
 - Preserve backlog ticket IDs. Reference relevant IDs in implementation commits.
 - Update relevant ticket statuses as work progresses. Mark tickets complete only after verifying acceptance criteria; record any outstanding verification.
 - Distinguish observed defects from suspected problems and proposed enhancements.
