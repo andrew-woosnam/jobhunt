@@ -15,7 +15,7 @@ Prioritize improvements that reduce application effort or increase application t
 - [ ] Write only blank Draft Answer cells matched by application URL and field ID; preserve existing answers and decisions.
 - [ ] Verify a first run produces usable drafts, and a repeat run preserves existing drafts. Treat external content as untrusted.
 
-Retain existing motivation answers as context; do not generate speculative answers to questions not present on retrieved forms. No LLM API or new paid service.
+Retain existing motivation answers as context; do not generate speculative answers to questions not present on retrieved forms. Use the existing schema for the first integration; legacy column retirement is JH-032. No LLM API or new paid service.
 
 ### JH-025 — Verify scheduled application question retrieval
 
@@ -27,16 +27,25 @@ Retain existing motivation answers as context; do not generate speculative answe
 
 ## Next
 
-| ID | Improvement | Desired outcome |
-|---|---|---|
-| JH-027 | Evaluate application preparation | After JH-026, use drafts in three to five real applications; record answer quality, time savings and remaining friction in the journal. No dedicated evaluation framework. |
-| JH-012 | Simplify employer and listing eligibility | New suitable listings from approved employers enter the actionable queue without redundant manual approval. Employer decisions remain revisable; individual listings retain independent fit rankings, dismissal and deprioritization options. Preserve history when eligibility changes. |
-| JH-011 | Discover postings at known employers | Retrieve new postings from supported ATS boards in Google Apps Script; start with known board identifiers and deterministic normalization/deduplication. Broad employer discovery remains AI-assisted. Split into smaller deliverables when selected. |
-| JH-001 | Automatically identify closed postings | Verify availability using deterministic ATS retrieval where supported; record confirmed closures and their first observation date without losing application history. Retrieval failures do not establish closure. |
-| JH-016 | Improve candidate context and answer reuse | Retrieve relevant professional experience and previous answers without repeatedly researching or drafting from scratch. Keep private candidate information outside the public repository. |
-| JH-013 | Validate email reconciliation | Evaluate the existing confirmation-email workflow and correct demonstrated gaps. Unambiguous confirmations update the correct application record and submission date; ambiguous matches remain for review. |
+Complete the application preparation increment first, then align the remaining work with the [intended workflow](README.md#intended-workflow). The table below follows workflow order, not a mandatory development sequence. Reuse existing functionality where possible.
 
-Reassess this order after JH-027. Prefer shared ATS retrieval for JH-011 and JH-001. Verify mailbox access before migrating JH-013 to Google Apps Script. Scope each improvement to the smallest useful outcome.
+| ID | Improvement | Desired outcome / acceptance criteria | Dependencies |
+|---|---|---|---|
+| JH-027 | Evaluate application preparation | Use drafts in three to five real applications; record answer quality, time savings and remaining friction in the journal. No dedicated evaluation framework. | JH-026 |
+| JH-028 | Discover new employers for approval | A scheduled ChatGPT task researches and deduplicates prospective employers two or three times weekly, plus ad hoc, and records candidates for human review without automatically approving them. | JH-012's approval semantics |
+| JH-012 | Formalize employer approval | Establish unambiguous, revisable employer approval/exclusion in the existing tracker. Unreviewed employers do not enter deterministic board discovery. Preserve history when decisions change. | — |
+| JH-011 | Retrieve postings at approved employers | Google Apps Script retrieves published postings from known supported ATS boards daily, normalizes metadata and persists new postings without duplicate identities or overwriting manual decisions. Start with known board identifiers; defer unsupported boards. | JH-012 |
+| JH-030 | Filter obvious listing mismatches | Deterministic filtering excludes clear mismatches using reliable structured constraints; uncertain cases remain eligible for AI evaluation. Preserve manual overrides. | JH-011 |
+| JH-029 | Integrate AI listing fit and priority evaluation | Adapt the existing AI discovery workflow to assess new, unevaluated listings for technical fit, eligibility, compensation and priority. Suitable listings proceed to form retrieval without mandatory per-listing approval; unsuitable listings do not. Verify the handoff and preservation of manual decisions. | JH-030, JH-004 |
+| JH-001 | Verify posting availability | Google Apps Script verifies unapplied listings daily, preferably using the board retrieval already performed by JH-011. Record confirmed closures and their first observation date without losing application history. Failed form retrieval or uncertain availability is not proof of closure. | Reuse JH-011 where supported |
+| JH-013 | Validate email reconciliation | Verify the existing confirmation-email workflow and mailbox access; identify reliably matchable confirmations and cases requiring judgment. Preserve the original application date and avoid ambiguous matches. | — |
+| JH-031 | Migrate unambiguous email reconciliation | Google Apps Script checks relevant confirmations daily and updates only confidently matched existing listings; ambiguous cases remain for review. Validate repeat execution and preservation of later statuses and existing dates before disabling the replaced AI behavior. | JH-013 |
+| JH-032 | Retire legacy listing-specific motivation storage | Preserve existing motivation answers, update remaining consumers and remove the superseded Jobs motivation column once drafting against actual questions is validated. | JH-026 |
+| JH-016 | Improve candidate context and answer reuse | Retrieve relevant professional experience and previous answers without repeatedly researching or drafting from scratch. Keep private candidate information outside the public repository. | Reassess after JH-027 |
+
+Human review, reprioritization, dismissal and application submission remain existing manual operations; no automation ticket is needed for them. Question retrieval and drafting are covered by JH-004, JH-025 and JH-026.
+
+Prefer shared ATS retrieval for discovery and availability verification. Verify access before migrating email reconciliation. Retire superseded scheduled-task responsibilities only after their replacements are validated. Reassess delivery order after JH-027; avoid speculative infrastructure.
 
 ## Consolidated / supporting work
 
@@ -44,14 +53,14 @@ These original tickets are retained for continuity but are not independent deliv
 
 | ID | Original concern | Treatment |
 |---|---|---|
-| JH-002 | Separate posting and application state | Make only the schema adjustments needed by JH-012 and JH-001; preserve existing application progress. |
+| JH-002 | Separate posting and application state | Make only the schema adjustments needed by employer approval, listing evaluation and availability verification (JH-012, JH-029, JH-001); preserve existing application progress. |
 | JH-005 | Workflow coordination | Move deterministic operations into Google Apps Script incrementally; retain scheduled ChatGPT for research, judgment and drafting. Inspect existing automation responsibilities before replacing them; use Sheets as shared state rather than building a workflow engine. |
 | JH-006 | Identity and deduplication | Address demonstrated identity or matching risks within affected workflows. |
 | JH-007 | Manual edit protection | Preserve manual decisions and approved content in each affected workflow. |
 | JH-008 | Retry and partial failure recovery | Handle concrete failure modes within affected workflows; avoid generic retry infrastructure. |
 | JH-009 | Data validation | Structure and validate fields as needed for actual filtering or automated updates. |
 | JH-010 | Automation visibility | Use lightweight execution summaries and actionable errors where needed. |
-| JH-014 | Incremental processing | Incorporate into JH-016 where it reduces redundant research or inference. |
+| JH-014 | Incremental processing | Apply within each workflow to avoid redundant retrieval, research or inference; no separate framework. |
 | JH-015 | AI output quality | Evaluate grounding and practical answer quality within JH-026 and JH-027 before considering dedicated evaluation tooling. |
 | JH-018 | Scheduled refresh | Incorporate into JH-001 using existing scheduling where adequate. |
 | JH-019 | Outcome measurement | Record informal time savings and observed friction in the journal under JH-027. No dedicated analytics implementation. |
