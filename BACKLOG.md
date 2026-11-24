@@ -18,8 +18,6 @@ Highest immediate return: make the implemented retrieval/drafting pipeline relia
 
 | ID | Improvement | Desired outcome / acceptance criteria | Dependencies |
 |---|---|---|---|
-| JH-037 | Confirm question retrieval trigger | Confirm or configure the time-driven Google Apps Script trigger for application question retrieval. | JH-004 |
-| JH-038 | Verify unattended question retrieval | Inspect a successful time-driven execution. An empty-queue run is sufficient initially; confirm newly eligible listings are processed without duplicates during normal use. | JH-037 |
 | JH-034 | Verify unattended AI drafting | Inspect a scheduled run for successful current prompt retrieval, matching file SHA and correct incremental processing. No manual initiation required. | JH-026 |
 | JH-039 | Verify retrieval-to-drafting cadence | Confirm the scheduled retrieval and drafting tasks hand off outstanding work across runs without requiring strict ordering or losing delayed work. Adjust cadence only if needed. | JH-038, JH-034 |
 | JH-035 | Verify fail-closed prompt retrieval | Use a controlled missing-file or failed-retrieval case to confirm the drafting task reports the failure and performs no writes. Avoid disrupting the live schedule or tracker. | JH-026 |
@@ -68,7 +66,7 @@ These original tickets are retained for continuity but are not independent deliv
 
 | ID | Original concern | Treatment |
 |---|---|---|
-| JH-025 | Scheduled application question retrieval | Retrieval implementation is complete under JH-004; original scheduling scope is split into JH-037–JH-039. Operational verification remains outstanding. |
+| JH-025 | Scheduled application question retrieval | Retrieval implementation is complete under JH-004; trigger and unattended baseline confirmed under JH-037/JH-038. Retrieval-to-drafting handoff remains JH-039. |
 | JH-002 | Separate posting and application state | Schema migration complete: Listings implies unapplied intent, Applications holds ongoing submissions, Job History holds terminal records; Listings Status removed. Remaining operational transitions and employer/listing eligibility are tracked under JH-031, JH-012, JH-029 and JH-001. |
 | JH-005 | Workflow coordination | Move deterministic operations into Google Apps Script incrementally; retain scheduled ChatGPT for research, judgment and drafting. Inspect existing automation responsibilities before replacing them; use Sheets as shared state rather than building a workflow engine. |
 | JH-006 | Identity and deduplication | Address demonstrated identity or matching risks within affected workflows. |
@@ -98,6 +96,14 @@ Material posting change detection is deferred within JH-001 unless stale researc
 Automated application submission and general-purpose agent frameworks remain outside the current scope.
 
 ## Done
+
+### JH-037 — Confirm question retrieval trigger
+
+**Completed:** 2026-11-24. User confirmed a time-driven `retrieveApplicationQuestions` trigger, temporarily set to ten-minute intervals for testing.
+
+### JH-038 — Verify unattended question retrieval (baseline)
+
+**Completed:** 2026-11-24. User supplied two successful time-driven executions (15:24:32 and 15:34:32 Pacific; 3.14 s and 8.413 s). Live tracker read-back showed 33 eligible listings, zero pending form retrievals, 33 form records and 316 question records with no duplicate question identities. This satisfies the initial empty-queue check; actual retrieval of a newly eligible listing, Fit ordering and retrieval-to-drafting handoff remain to be observed. Execution details and exact deployed source were not independently inspected. Restore a sustainable trigger cadence after testing.
 
 ### JH-043 — Derive application priority from fit and preparation
 
