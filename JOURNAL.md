@@ -57,3 +57,21 @@ Retain the components that work well. Establish and triage a backlog of product 
 An initial candidate for improvement is one-click tracker refresh: verify posting availability, detect material changes and accurately update relevant state and timestamps.
 
 Select infrastructure based on concrete requirements rather than anticipated complexity.
+
+## 2026-11-24 — Reassessing priorities
+
+Development is beginning to compete with the project's primary purpose: submitting job applications. The existing system is reasonably functional, and many proposed improvements address technical shortcomings rather than practical obstacles.
+
+### Observations
+
+- Drafting responses to application questions is the largest recurring source of friction, requiring repeated interactions with AI.
+- New openings at previously approved employers should not require redundant approval. Individual listings should still be ranked by suitability and dismissible independently.
+- Discovering that a posting has closed is a minor inconvenience. Automatically recording closures and when they were first observed would be useful, but historical analysis is not a priority.
+- Application tracking should eventually be handled automatically through employer confirmation emails.
+- A standard resume is currently sufficient; automated tailoring offers little immediate value.
+
+### Direction
+
+Reprioritize the backlog according to demonstrated problems and anticipated time savings, accounting for development and maintenance costs.
+
+First, experiment with retrieving questions from application forms and preparing tailored answers in advance. Evaluate feasibility and practical value through actual applications before investing in dedicated software or infrastructure.
